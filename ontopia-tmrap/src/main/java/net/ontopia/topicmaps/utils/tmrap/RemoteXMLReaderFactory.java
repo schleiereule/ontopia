@@ -33,8 +33,7 @@ import org.xml.sax.XMLReader;
  * Purpose: An implementation of the XMLReaderFactoryIF interface where the XML reader is reused instead of being created each time.
  */
 
-public class RemoteXMLReaderFactory extends Object implements
-    XMLReaderFactoryIF {
+public class RemoteXMLReaderFactory implements XMLReaderFactoryIF {
 
   private Class<? extends XMLReader> readerClass;
 
