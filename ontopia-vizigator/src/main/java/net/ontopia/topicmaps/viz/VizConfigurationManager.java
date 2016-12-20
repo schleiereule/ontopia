@@ -196,7 +196,7 @@ public abstract class VizConfigurationManager {
    * map.
    */
   protected void setOccurenceValue(TopicIF type, TopicIF occtype, boolean value) {
-    setOccurenceValue(type, occtype, (value).toString());
+    setOccurenceValue(type, occtype, Boolean.toString(value));
   }
 
   public String getOccurrenceValue(TopicIF type, TopicIF occtype) {
