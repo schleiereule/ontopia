@@ -342,7 +342,7 @@ public class XMLConfigSource {
                 break;
               }
               else if (props[i].getPropertyType().equals(boolean.class)) {
-                setter.invoke(source, new Object[] {new Boolean(PropertyUtils.isTrue(param_value))});
+                setter.invoke(source, new Object[] {PropertyUtils.isTrue(param_value)});
                 found_property = true;
                 break;
               }
