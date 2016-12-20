@@ -35,7 +35,6 @@ import net.ontopia.topicmaps.core.AbstractTopicMapTest;
 import net.ontopia.topicmaps.entry.TopicMapReferenceIF;
 import net.ontopia.topicmaps.utils.ImportExportUtils;
 import net.ontopia.utils.OntopiaRuntimeException;
-import net.ontopia.utils.FileUtils;
 import net.ontopia.utils.TestFileUtils;
 
 public abstract class AssociationEventsTest extends AbstractTopicMapTest {

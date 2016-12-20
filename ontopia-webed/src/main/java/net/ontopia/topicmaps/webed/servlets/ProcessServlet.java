@@ -60,7 +60,6 @@ import net.ontopia.topicmaps.webed.impl.basic.ActionInGroup;
 import net.ontopia.topicmaps.webed.impl.basic.ActionParameters;
 import net.ontopia.topicmaps.webed.impl.basic.ActionRegistryIF;
 import net.ontopia.topicmaps.webed.impl.basic.ActionResponse;
-import net.ontopia.topicmaps.webed.impl.basic.ActionValidationException;
 import net.ontopia.topicmaps.webed.impl.basic.Constants;
 import net.ontopia.topicmaps.webed.impl.basic.NoActionDataFoundException;
 import net.ontopia.topicmaps.webed.impl.basic.ParamRuleIF;

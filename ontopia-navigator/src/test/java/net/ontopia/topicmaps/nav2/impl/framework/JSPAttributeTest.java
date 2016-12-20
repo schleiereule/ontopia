@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Collections;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.JspException;
@@ -45,7 +44,6 @@ import net.ontopia.utils.ontojsp.FakeServletRequest;
 import net.ontopia.utils.ontojsp.JSPPageExecuter;
 import net.ontopia.utils.ontojsp.JSPPageReader;
 import net.ontopia.utils.ontojsp.JSPTreeNodeIF;
-import net.ontopia.utils.OntopiaRuntimeException;
 import net.ontopia.topicmaps.nav2.core.NavigatorRuntimeException;
 
 import org.junit.Assert;

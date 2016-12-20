@@ -34,7 +34,6 @@ import net.ontopia.topicmaps.nav2.utils.NavigatorConfigurationContentHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

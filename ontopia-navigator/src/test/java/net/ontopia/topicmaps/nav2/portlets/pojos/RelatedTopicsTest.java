@@ -20,7 +20,6 @@
 
 package net.ontopia.topicmaps.nav2.portlets.pojos;
 
-import java.io.File;
 import java.io.StringReader;
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +36,6 @@ import net.ontopia.topicmaps.core.AssociationRoleIF;
 import net.ontopia.topicmaps.utils.ImportExportUtils;
 import net.ontopia.topicmaps.utils.ltm.LTMTopicMapReader;
 import net.ontopia.topicmaps.nav2.portlets.pojos.RelatedTopics;
-import net.ontopia.utils.FileUtils;
 import net.ontopia.utils.TestFileUtils;
 
 import org.junit.Assert;

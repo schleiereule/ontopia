@@ -22,9 +22,6 @@ package net.ontopia.topicmaps.nav2.plugins;
 
 import java.util.Set;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.http.HttpServletRequest;
 
 import net.ontopia.utils.StringUtils;
 import net.ontopia.utils.CompactHashSet;

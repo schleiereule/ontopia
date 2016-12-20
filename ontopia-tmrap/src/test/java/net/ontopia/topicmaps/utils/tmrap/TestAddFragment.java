@@ -29,7 +29,6 @@ import java.util.Hashtable;
 
 import javax.servlet.ServletException;
 
-import net.ontopia.utils.FileUtils;
 import net.ontopia.utils.TestFileUtils;
 
 import org.junit.Test;

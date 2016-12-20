@@ -22,7 +22,6 @@ package net.ontopia.topicmaps.cmdlineutils;
 
 import java.io.IOException;
 import net.ontopia.topicmaps.xml.XTMTopicMapReader;
-import net.ontopia.utils.FileUtils;
 import net.ontopia.utils.TestFileUtils;
 import net.ontopia.utils.URIUtils;
 

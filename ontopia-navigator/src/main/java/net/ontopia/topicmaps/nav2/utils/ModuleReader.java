@@ -30,7 +30,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import net.ontopia.xml.ConfiguredXMLReaderFactory;
-import net.ontopia.utils.OntopiaRuntimeException;
 import net.ontopia.utils.EncryptedInputStream;
 import net.ontopia.topicmaps.nav2.core.ModuleReaderIF;
 

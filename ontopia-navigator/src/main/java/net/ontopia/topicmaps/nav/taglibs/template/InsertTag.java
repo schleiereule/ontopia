@@ -20,8 +20,6 @@
 
 package net.ontopia.topicmaps.nav.taglibs.template;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Stack;
 import javax.servlet.jsp.JspException;

@@ -23,7 +23,6 @@ package net.ontopia.topicmaps.nav2.taglibs.tolog;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Arrays;
 import java.util.ArrayList;
 
 import javax.servlet.jsp.JspTagException;

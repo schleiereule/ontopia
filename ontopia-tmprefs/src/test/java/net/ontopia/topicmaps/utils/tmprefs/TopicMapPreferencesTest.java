@@ -22,7 +22,6 @@ package net.ontopia.topicmaps.utils.tmprefs;
 
 import org.junit.Test;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -37,7 +36,6 @@ import java.io.File;
 
 import net.ontopia.topicmaps.core.TopicMapIF;
 import net.ontopia.topicmaps.xml.CanonicalXTMWriter;
-import net.ontopia.utils.FileUtils;
 import net.ontopia.utils.TestFileUtils;
 import net.ontopia.topicmaps.utils.ltm.LTMTopicMapWriter;
 import net.ontopia.topicmaps.entry.TopicMapReferenceIF;

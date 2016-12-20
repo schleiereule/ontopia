@@ -22,20 +22,6 @@ package net.ontopia.topicmaps.impl.tmapi2;
 
 import junit.framework.TestCase;
 
-import net.ontopia.infoset.core.LocatorIF;
-import net.ontopia.infoset.impl.basic.URILocator;
-import net.ontopia.topicmaps.core.OccurrenceIF;
-import net.ontopia.topicmaps.core.TopicIF;
-import net.ontopia.topicmaps.core.TopicMapIF;
-import net.ontopia.topicmaps.impl.basic.InMemoryTopicMapStore;
-
-import org.tmapi.core.Locator;
-import org.tmapi.core.Occurrence;
-import org.tmapi.core.TMAPIException;
-import org.tmapi.core.Topic;
-import org.tmapi.core.TopicMap;
-import org.tmapi.core.TopicMapSystem;
-import org.tmapi.core.TopicMapSystemFactory;
 
 public class LocatorExternalFormTest extends TestCase {
 

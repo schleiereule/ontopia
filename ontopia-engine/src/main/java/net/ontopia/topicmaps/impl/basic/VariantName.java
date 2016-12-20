@@ -26,7 +26,6 @@ import java.io.IOException;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
 
 import net.ontopia.infoset.core.LocatorIF;
 import net.ontopia.infoset.impl.basic.URILocator;

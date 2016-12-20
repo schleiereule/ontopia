@@ -24,7 +24,6 @@ import java.io.File;
 import java.io.IOException;
 import net.ontopia.infoset.core.LocatorIF;
 import net.ontopia.infoset.fulltext.core.IndexerIF;
-import net.ontopia.infoset.fulltext.core.SearcherIF;
 import net.ontopia.infoset.fulltext.impl.lucene.LuceneIndexer;
 import net.ontopia.topicmaps.core.StoreNotOpenException;
 import net.ontopia.topicmaps.impl.utils.TopicMapTransactionIF;

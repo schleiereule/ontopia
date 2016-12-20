@@ -35,7 +35,6 @@ import net.ontopia.topicmaps.core.VariantNameIF;
 import net.ontopia.topicmaps.core.OccurrenceIF;
 import net.ontopia.topicmaps.nav2.core.NavigatorConfigurationIF;
 import net.ontopia.topicmaps.nav2.core.ContextManagerIF;
-import net.ontopia.topicmaps.nav2.core.NavigatorRuntimeException;
 import net.ontopia.utils.ObjectUtils;
 
 /**

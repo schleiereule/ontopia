@@ -21,7 +21,6 @@
 package net.ontopia.topicmaps.utils;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.FileOutputStream;
 import java.net.MalformedURLException;

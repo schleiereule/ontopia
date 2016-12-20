@@ -24,10 +24,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.List;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -49,7 +47,6 @@ import net.ontopia.topicmaps.query.core.QueryResultIF;
 import net.ontopia.topicmaps.query.core.QueryProcessorIF;
 import net.ontopia.topicmaps.query.core.DeclarationContextIF;
 import net.ontopia.topicmaps.query.core.InvalidQueryException;
-import net.ontopia.topicmaps.query.impl.basic.QueryProcessor;
 
 /**
  * PUBLIC: This component can produce a model representing the

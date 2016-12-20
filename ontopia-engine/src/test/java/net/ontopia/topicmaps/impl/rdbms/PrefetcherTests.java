@@ -20,7 +20,6 @@
 
 package net.ontopia.topicmaps.impl.rdbms;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
@@ -28,7 +27,6 @@ import net.ontopia.infoset.core.LocatorIF;
 import net.ontopia.infoset.impl.basic.URILocator;
 import net.ontopia.persistence.proxy.RDBMSStorage;
 import net.ontopia.persistence.proxy.StorageIF;
-import net.ontopia.topicmaps.core.AbstractTopicMapTest;
 import net.ontopia.topicmaps.core.AssociationIF;
 import net.ontopia.topicmaps.core.AssociationRoleIF;
 import net.ontopia.topicmaps.core.TopicIF;
@@ -43,7 +41,6 @@ import net.ontopia.topicmaps.query.core.QueryResultIF;
 import net.ontopia.topicmaps.query.core.InvalidQueryException;
 import net.ontopia.topicmaps.utils.ImportExportUtils;
 import net.ontopia.utils.OntopiaRuntimeException;
-import net.ontopia.utils.FileUtils;
 import net.ontopia.utils.TestFileUtils;
 import net.ontopia.utils.URIUtils;
 import junit.framework.TestCase;
