@@ -40,7 +40,7 @@ public interface TopicMapImporterIF {
    * @param topicmap The topic map into which the import will be done;
    *                 an object implementing TopicMapIF.
    */
-  public void importInto(TopicMapIF topicmap) throws IOException;
+  void importInto(TopicMapIF topicmap) throws IOException;
   
 }
 

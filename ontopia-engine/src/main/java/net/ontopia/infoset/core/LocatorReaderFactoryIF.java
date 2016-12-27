@@ -36,7 +36,7 @@ public interface LocatorReaderFactoryIF {
    * @return A reader for the locator. An IOException is thrown if a
    * reader cannot be created.
    */
-  public Reader createReader(LocatorIF locator) throws IOException;
+  Reader createReader(LocatorIF locator) throws IOException;
   
 }
 

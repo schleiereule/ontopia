@@ -33,13 +33,13 @@ public interface PreloaderIF {
    *
    * @return Returns a locator that references the preloaded resource.
    */
-  public LocatorIF preload(LocatorIF locator) throws IOException;
+  LocatorIF preload(LocatorIF locator) throws IOException;
 
   /**
    * INTERNAL: Can be used to figure out if it is necessary to preload
    * the resource referenced by the locator.<p>
    */
-  public boolean needsPreloading(LocatorIF locator);
+  boolean needsPreloading(LocatorIF locator);
   
 }
 

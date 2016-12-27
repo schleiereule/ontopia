@@ -40,7 +40,7 @@ public interface NameIndexIF extends IndexIF {
    *
    * @return A collection of TopicNameIF objects with the given name value.
    */
-  public Collection<TopicNameIF> getTopicNames(String name_value);
+  Collection<TopicNameIF> getTopicNames(String name_value);
 
   /**
    * INTERNAL: Gets all variants that have the specified value 
@@ -48,7 +48,7 @@ public interface NameIndexIF extends IndexIF {
    *
    * @return A collection of VariantNameIF objects.
    */
-  public Collection<VariantNameIF> getVariants(String value);
+  Collection<VariantNameIF> getVariants(String value);
 
   /**
    * INTERNAL: Gets all variants that have the specified value and
@@ -57,7 +57,7 @@ public interface NameIndexIF extends IndexIF {
    * @return A collection of VariantNameIF objects.
    * @since 4.0
    */
-  public Collection<VariantNameIF> getVariants(String value, LocatorIF datatype);
+  Collection<VariantNameIF> getVariants(String value, LocatorIF datatype);
   
 }
 

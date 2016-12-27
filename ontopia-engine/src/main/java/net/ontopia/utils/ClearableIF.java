@@ -28,6 +28,6 @@ package net.ontopia.utils;
 
 public interface ClearableIF {
 
-  public void clear();
+  void clear();
   
 }

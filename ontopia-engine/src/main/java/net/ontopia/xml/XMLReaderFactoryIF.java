@@ -35,6 +35,6 @@ public interface XMLReaderFactoryIF {
    * @exception SAXException Thrown if there are any problems with
    * creating the XMLReader.
    */
-  public XMLReader createXMLReader() throws SAXException;
+  XMLReader createXMLReader() throws SAXException;
     
 }

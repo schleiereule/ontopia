@@ -32,6 +32,6 @@ public interface ClosureIF {
   /**
    * Performs some operation on the input object.
    */
-  public void execute(Object object);
+  void execute(Object object);
 
 }
