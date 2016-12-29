@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
 public class NavigatorConfigFactory {
 
   // initialization of log facility
-  private static Logger log = LoggerFactory
+  private static final Logger log = LoggerFactory
     .getLogger(NavigatorConfigFactory.class.getName());
 
   public static NavigatorConfigurationIF getConfiguration(InputStream stream)

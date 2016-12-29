@@ -41,7 +41,7 @@ import net.ontopia.xml.Slf4jSaxErrorHandler;
 public class PluginConfigFactory {
 
   // initialization of log facility
-  private static Logger log = LoggerFactory
+  private static final Logger log = LoggerFactory
     .getLogger(PluginConfigFactory.class.getName());
 
   /**
