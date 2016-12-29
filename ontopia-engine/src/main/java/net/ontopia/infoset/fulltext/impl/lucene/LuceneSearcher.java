@@ -52,7 +52,7 @@ import org.apache.lucene.util.Version;
 public class LuceneSearcher implements SearcherIF {
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(LuceneSearcher.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(LuceneSearcher.class.getName());
 
   protected String path;
   protected Analyzer analyzer;
@@ -251,7 +251,7 @@ public class LuceneSearcher implements SearcherIF {
   }
 
   private static class OptionsListener implements CmdlineOptions.ListenerIF {
-    String fields = "object_id,class,content,notation,address";
+    private String fields = "object_id,class,content,notation,address";
 
     public void processOption(char option, String value)
         throws CmdlineOptions.OptionsException {

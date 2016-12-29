@@ -64,7 +64,7 @@ import org.apache.lucene.util.Version;
 public class LuceneIndexer implements IndexerIF {
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(LuceneIndexer.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(LuceneIndexer.class.getName());
 
   static {
     try {
@@ -385,13 +385,13 @@ public class LuceneIndexer implements IndexerIF {
   }
 
   private static class OptionsListener implements CmdlineOptions.ListenerIF {
-    String propfile;
-    String syntax;
-    boolean external = false;
-    int timeout = 60000;
-    int max_threads = 10;
-    String preloaddir = System.getProperty("user.dir") + File.separator + "preloader";
-    String acname;
+    private String propfile;
+    private String syntax;
+    private boolean external = false;
+    private int timeout = 60000;
+    private int max_threads = 10;
+    private String preloaddir = System.getProperty("user.dir") + File.separator + "preloader";
+    private String acname;
     public void processOption(char option, String value) throws CmdlineOptions.OptionsException {
       if (option == 'e')
         external = true;

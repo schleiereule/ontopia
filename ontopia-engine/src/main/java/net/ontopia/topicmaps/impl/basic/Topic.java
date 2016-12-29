@@ -51,7 +51,7 @@ import net.ontopia.topicmaps.impl.utils.ObjectStrings;
 
 public class Topic extends TMObject implements TopicIF {
 
-  static final long serialVersionUID = 6846760964906826812L;
+  private static final long serialVersionUID = 6846760964906826812L;
 
   protected Set<LocatorIF> subjects;
   protected Set<LocatorIF> indicators;
@@ -81,7 +81,7 @@ public class Topic extends TMObject implements TopicIF {
   /**
    * INTERNAL: Sets the topic map that the object belongs to. [parent]
    */
-  void setTopicMap(TopicMap parent) {
+  protected void setTopicMap(TopicMap parent) {
     // (De)reference pooled sets
     if (parent == null) {
       if (scope != null)
@@ -400,7 +400,7 @@ public class Topic extends TMObject implements TopicIF {
     return reified;
   }
 
-  void setReified(ReifiableIF reified) {
+  protected void setReified(ReifiableIF reified) {
     ReifiableIF oldReified = getReified();
     if (ObjectUtils.different(oldReified, reified)) {
       // remove reifier from old reifiable

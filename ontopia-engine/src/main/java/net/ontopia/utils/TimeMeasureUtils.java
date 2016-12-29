@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
  * measurement. Based on system clock in milliseconds.
  */
 public class TimeMeasureUtils {
-  static Logger logger = LoggerFactory.getLogger(TimeMeasureUtils.class.getName());
+  private static Logger logger = LoggerFactory.getLogger(TimeMeasureUtils.class.getName());
   private static Map timeTable = new HashMap();
 
   public static void startAction(String key) {

@@ -55,9 +55,9 @@ import org.slf4j.LoggerFactory;
 public class DiskPreloader implements PreloaderIF, LocatorReaderFactoryIF {
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(DiskPreloader.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(DiskPreloader.class.getName());
 
-  static String NOTATION = "RFILE";
+  public static final String NOTATION = "RFILE";
 
   protected LocatorReaderFactoryIF lrf;
   protected String preloader_path;

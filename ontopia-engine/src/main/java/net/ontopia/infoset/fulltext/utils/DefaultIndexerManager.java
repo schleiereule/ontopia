@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
 public class DefaultIndexerManager implements IndexerIF {
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(DefaultIndexerManager.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(DefaultIndexerManager.class.getName());
   
   protected IndexerIF indexer;
   protected DocumentProcessorIF processor;

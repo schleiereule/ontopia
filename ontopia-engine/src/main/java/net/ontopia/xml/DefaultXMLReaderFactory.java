@@ -41,7 +41,7 @@ import org.xml.sax.XMLReader;
 public class DefaultXMLReaderFactory implements XMLReaderFactoryIF {
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(DefaultXMLReaderFactory.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(DefaultXMLReaderFactory.class.getName());
     
   public XMLReader createXMLReader() throws SAXException {
     try {

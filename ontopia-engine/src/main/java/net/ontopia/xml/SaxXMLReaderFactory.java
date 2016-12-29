@@ -34,7 +34,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 public class SaxXMLReaderFactory implements XMLReaderFactoryIF {
 
-  String driver;
+  private String driver;
   
   public SaxXMLReaderFactory() {
     this.driver = null;

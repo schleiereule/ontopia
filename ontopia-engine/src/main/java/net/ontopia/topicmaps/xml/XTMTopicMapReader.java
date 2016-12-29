@@ -67,7 +67,7 @@ public class XTMTopicMapReader extends AbstractXMLFormatReader
   protected boolean validate;
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(XTMTopicMapReader.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(XTMTopicMapReader.class.getName());
 
   /**
    * PUBLIC: Creates a topic map reader bound to the URL given in the

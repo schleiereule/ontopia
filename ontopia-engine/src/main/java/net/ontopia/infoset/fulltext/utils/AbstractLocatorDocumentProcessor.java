@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractLocatorDocumentProcessor implements DocumentProcessorIF {
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(AbstractLocatorDocumentProcessor.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(AbstractLocatorDocumentProcessor.class.getName());
 
   protected String notation_field;
   protected String address_field;

@@ -40,9 +40,9 @@ import org.slf4j.LoggerFactory;
 public class StreamUtils {
   
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(StreamUtils.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(StreamUtils.class.getName());
   
-  static final int BUFFER_SIZE = 16384;
+  private static final int BUFFER_SIZE = 16384;
   
   /**
    * INTERNAL: Transfers the entire contents of the InputStream to the

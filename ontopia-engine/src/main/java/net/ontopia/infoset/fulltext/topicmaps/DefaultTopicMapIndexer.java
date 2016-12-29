@@ -62,7 +62,7 @@ import org.slf4j.LoggerFactory;
 public class DefaultTopicMapIndexer {
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(DefaultTopicMapIndexer.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(DefaultTopicMapIndexer.class.getName());
 
   protected IndexerIF indexer;
   protected boolean index_external;

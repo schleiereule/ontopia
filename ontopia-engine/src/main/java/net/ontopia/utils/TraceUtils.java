@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 public class TraceUtils {
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(TraceUtils.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(TraceUtils.class.getName());
 
   private static Map syncs = new HashMap();
 

@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 public class DocumentPreloaderProcessor extends AbstractLocatorDocumentProcessor {
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(DocumentPreloaderProcessor.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(DocumentPreloaderProcessor.class.getName());
 
   // protected String content_field;
 
