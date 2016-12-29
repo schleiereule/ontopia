@@ -55,7 +55,7 @@ import EDU.oswego.cs.dl.util.concurrent.TimeoutException;
 public class ThreadedIndexerManager implements IndexerIF {
 
   // Define a logging category.
-  static Logger log = LoggerFactory.getLogger(ThreadedIndexerManager.class.getName());
+  private static final Logger log = LoggerFactory.getLogger(ThreadedIndexerManager.class.getName());
   
   protected IndexerIF se_indexer;
   protected DocumentProcessorIF doc_processor;
@@ -79,7 +79,7 @@ public class ThreadedIndexerManager implements IndexerIF {
   protected int processed = 0;
   protected int indexed = 0;
 
-  boolean shutting_down = false;
+  private boolean shutting_down = false;
 
   /**
    * Creates the manager and gives it the indexer used to do the actual
@@ -95,7 +95,7 @@ public class ThreadedIndexerManager implements IndexerIF {
   public ThreadedIndexerManager(IndexerIF se_indexer, PooledExecutor _processor, QueuedExecutor _indexer) {
     this.se_indexer = se_indexer;
 
-    this.processor_thread_factory = new DefaultThreadFactory("processor", false);
+    this.processor_thread_factory = new DefaultThreadFactory(false);
     
     if (_processor != null)
       this.processor = _processor;
@@ -118,7 +118,7 @@ public class ThreadedIndexerManager implements IndexerIF {
     else {
       // Instantiate document indexer queue
       indexer = new QueuedExecutor(new LinkedQueue());
-      indexer.setThreadFactory(new DefaultThreadFactory("indexer", false));
+      indexer.setThreadFactory(new DefaultThreadFactory(false));
     }    
   }
 
@@ -198,22 +198,19 @@ public class ThreadedIndexerManager implements IndexerIF {
   // }
   
   class DefaultThreadFactory implements ThreadFactory {
-    protected ThreadGroup group;
     protected boolean daemon;
-    DefaultThreadFactory(String group_name, boolean daemon) {
-      this.group = new ThreadGroup(group_name);
+    DefaultThreadFactory(boolean daemon) {
       this.daemon = daemon;
     }
     public Thread newThread(Runnable command) {
-      Thread thread = new DefaultThread(group, command);
+      Thread thread = new DefaultThread(command);
       if (daemon) thread.setDaemon(true);
       return thread;
     }
 
     class DefaultThread extends Thread {
       protected Runnable runnable;
-      DefaultThread(ThreadGroup group, Runnable runnable) {
-        super(group, runnable);
+      DefaultThread(Runnable runnable) {
         this.runnable = runnable;
       }
       public String toString() {
@@ -392,7 +389,7 @@ public class ThreadedIndexerManager implements IndexerIF {
         Callable callable = new DocumentCallable(document);
         if (getProcessorTimeout() > 0) {
           TimedCallable timed = new TimedCallable(callable, getProcessorTimeout());
-          timed.setThreadFactory(new DefaultThreadFactory("callables", false));
+          timed.setThreadFactory(new DefaultThreadFactory(false));
           timed.call();
         } else {
           callable.call();
@@ -429,7 +426,7 @@ public class ThreadedIndexerManager implements IndexerIF {
     }    
   }
   
-  void startProcess(DocumentIF document) {
+  private void startProcess(DocumentIF document) {
     if (doc_processor != null && doc_processor.needsProcessing(document)) {
       processing++;
       try {
@@ -444,7 +441,7 @@ public class ThreadedIndexerManager implements IndexerIF {
     }
   }
   
-  void endProcess(DocumentIF document, boolean success) {
+  private void endProcess(DocumentIF document, boolean success) {
     processing--;
     // Index the document
     if (success) {
@@ -453,7 +450,7 @@ public class ThreadedIndexerManager implements IndexerIF {
     }
   }
     
-  void startIndex(DocumentIF document) {
+  private void startIndex(DocumentIF document) {
     indexing++;
     try {
       if (log.isDebugEnabled()) log.debug("Document added to indexing queue: " + document);
@@ -463,7 +460,7 @@ public class ThreadedIndexerManager implements IndexerIF {
     }
   }
     
-  void endIndex(DocumentIF document, boolean success) {
+  private void endIndex(DocumentIF document, boolean success) {
     indexing--;
     if (success) indexed++;
   }
@@ -477,24 +474,10 @@ public class ThreadedIndexerManager implements IndexerIF {
     log.debug("Non-indexable: " + non_indexable.size() + " Non-processable: " + non_processable.size());
     log.debug("Processor: " + processor.getPoolSize());
 
-    log.debug("Threads: " + Thread.currentThread().getThreadGroup().activeCount());
+    //log.debug("Threads: " + Thread.currentThread().getThreadGroup().activeCount());
     // log.debug("Indexer: " + indexer.getThread().isAlive());
   }
 
-  /**
-   * INTERNAL: Outputs thread status information to log4j.
-   */
-  public void threadStatus() {
-    ThreadGroup group = Thread.currentThread().getThreadGroup();
-    Thread[] threads = new Thread[group.activeCount()];
-    group.enumerate(threads);
-    for (int i = 0; i < threads.length; i++) {
-      Thread thread = threads[i];
-      log.debug("Thread: " + thread);
-    }
-
-  }
-    
   /**
    * INTERNAL: Outputs post execution status information to log4j.
    */
