@@ -33,9 +33,6 @@ import net.ontopia.infoset.core.LocatorReaderFactoryIF;
 import net.ontopia.infoset.core.PreloaderIF;
 import net.ontopia.infoset.impl.basic.GenericLocator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * INTERNAL: A preloader that stores its preloaded documents on the file
  * system.<p>
@@ -53,9 +50,6 @@ import org.slf4j.LoggerFactory;
  */
 
 public class DiskPreloader implements PreloaderIF, LocatorReaderFactoryIF {
-
-  // Define a logging category.
-  private static final Logger log = LoggerFactory.getLogger(DiskPreloader.class.getName());
 
   public static final String NOTATION = "RFILE";
 

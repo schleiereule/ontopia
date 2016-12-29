@@ -35,18 +35,12 @@ import net.ontopia.utils.CmdlineOptions;
 import net.ontopia.utils.CmdlineUtils;
 import net.ontopia.utils.StringUtils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /** 
  * INTERNAL: Command line tool for exporting comma- or semicolon
  * separated files into a database.
  */
 
 public class CSVExport {
-
-  // Define a logging category.
-  private static final Logger log = LoggerFactory.getLogger(CSVExport.class.getName());
 
   protected Connection conn;
   protected String separator = ";";

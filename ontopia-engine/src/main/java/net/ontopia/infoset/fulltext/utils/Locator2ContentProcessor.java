@@ -27,18 +27,12 @@ import net.ontopia.infoset.core.LocatorReaderFactoryIF;
 import net.ontopia.infoset.fulltext.core.DocumentIF;
 import net.ontopia.infoset.fulltext.core.GenericField;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * INTERNAL: A document processor that replaces notation and address
  * fields with a reader field.<p>
  */
 
 public class Locator2ContentProcessor extends AbstractLocatorDocumentProcessor {
-
-  // Define a logging category.
-  private static final Logger log = LoggerFactory.getLogger(Locator2ContentProcessor.class.getName());
 
   protected String content_field;
 
