@@ -348,7 +348,7 @@ public class ThreadedIndexerManager implements IndexerIF {
         log.error("Cannot index document: " + document + " " + e.toString());
         non_indexable.add(document);
       } finally {
-        endIndex(document, success);
+        endIndex(success);
       }
     }
   }
@@ -460,7 +460,7 @@ public class ThreadedIndexerManager implements IndexerIF {
     }
   }
     
-  private void endIndex(DocumentIF document, boolean success) {
+  private void endIndex(boolean success) {
     indexing--;
     if (success) indexed++;
   }
