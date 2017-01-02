@@ -47,7 +47,6 @@ public class MenuFileParser {
   private String source;
   private Map enabled;
   private int lineIndex;
-  private boolean succeeded;
   
   /**
    * Create new from a given file.
