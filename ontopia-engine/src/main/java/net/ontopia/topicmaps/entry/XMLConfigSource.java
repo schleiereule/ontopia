@@ -114,6 +114,7 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class XMLConfigSource {
+  private static final String CWD = "CWD";
 
   // Define a logging category.
   private static final Logger log = LoggerFactory.getLogger(XMLConfigSource.class.getName());
@@ -168,9 +169,9 @@ public class XMLConfigSource {
       environ = new HashMap<String, String>(1);
     if (url.getProtocol().equals("file")) {
       String file = url.getFile();
-      environ.put("CWD", file.substring(0, file.lastIndexOf('/')));
+      environ.put(CWD, file.substring(0, file.lastIndexOf('/')));
     } else
-      environ.put("CWD", ".");
+      environ.put(CWD, ".");
 
     // read configuration and create the repository instance
     try {
@@ -250,12 +251,12 @@ public class XMLConfigSource {
   public static List<TopicMapSourceIF> readSources(String config_file, Map<String, String> environ) {
     if (environ == null) environ = new HashMap<String, String>(1);
     // add CWD entry
-    if (!environ.containsKey("CWD")) {
+    if (!environ.containsKey(CWD)) {
       File file = new File(config_file);
       if (!file.exists())
         throw new OntopiaRuntimeException("Config file '" + config_file +
                                           "' does not exist.");
-      environ.put("CWD", file.getParent());
+      environ.put(CWD, file.getParent());
     }
 
     String url = URIUtils.getURI(config_file).getAddress();

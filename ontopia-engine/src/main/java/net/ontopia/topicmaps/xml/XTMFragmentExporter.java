@@ -53,6 +53,12 @@ import org.xml.sax.SAXException;
  * @see XTMTopicMapFragmentWriter
  */
 public class XTMFragmentExporter extends XTMTopicMapExporter {
+  private static final String CDATA = "CDATA";
+  private static final String XLINK_HREF = "xlink:href";
+  private static final String RESOURCEREF = "resourceRef";
+  private static final String SUBJECTINDICATORREF = "subjectIndicatorRef";
+  private static final String TOPICREF = "topicRef";
+  private static final String URI = "URI";
   
   public static final String VIRTUAL_URN = "urn:x-oks-virtual:";
   
@@ -148,8 +154,8 @@ public class XTMFragmentExporter extends XTMTopicMapExporter {
 
     // Calculate attributes
     atts.clear();
-    atts.addAttribute("xmlns", "CDATA", "http://www.topicmaps.org/xtm/1.0/");
-    atts.addAttribute("xmlns:xlink", "CDATA", "http://www.w3.org/1999/xlink");
+    atts.addAttribute("xmlns", CDATA, "http://www.topicmaps.org/xtm/1.0/");
+    atts.addAttribute("xmlns:xlink", CDATA, "http://www.w3.org/1999/xlink");
     
     // Output element
     dh.startElement("topicMap", atts);
@@ -253,18 +259,18 @@ public class XTMFragmentExporter extends XTMTopicMapExporter {
     if (!topic.getSubjectLocators().isEmpty()) {
       LocatorIF sub = (LocatorIF) topic.getSubjectLocators().iterator().next();
       atts.clear();
-      atts.addAttribute("xlink:href", "CDATA", sub.getAddress());
-      dh.startElement("resourceRef", atts);
-      dh.endElement("resourceRef");
+      atts.addAttribute(XLINK_HREF, CDATA, sub.getAddress());
+      dh.startElement(RESOURCEREF, atts);
+      dh.endElement(RESOURCEREF);
       return;
     }
 
     if (!topic.getSubjectIdentifiers().isEmpty()) {
       LocatorIF ind = (LocatorIF) topic.getSubjectIdentifiers().iterator().next();
       atts.clear();
-      atts.addAttribute("xlink:href", "CDATA", ind.getAddress());
-      dh.startElement("subjectIndicatorRef", atts);
-      dh.endElement("subjectIndicatorRef");
+      atts.addAttribute(XLINK_HREF, CDATA, ind.getAddress());
+      dh.startElement(SUBJECTINDICATORREF, atts);
+      dh.endElement(SUBJECTINDICATORREF);
       return;
     }
 
@@ -296,9 +302,9 @@ public class XTMFragmentExporter extends XTMTopicMapExporter {
 
     // now we can output
     atts.clear();
-    atts.addAttribute("xlink:href", "CDATA", reference);
-    dh.startElement("topicRef", atts);
-    dh.endElement("topicRef");
+    atts.addAttribute(XLINK_HREF, CDATA, reference);
+    dh.startElement(TOPICREF, atts);
+    dh.endElement(TOPICREF);
   }
   
   protected void writeSubjectIdentity(TopicIF topic, DocumentHandler dh)
@@ -312,12 +318,12 @@ public class XTMFragmentExporter extends XTMTopicMapExporter {
     while (it.hasNext()) {
       LocatorIF subject = (LocatorIF) it.next();
       String notation = subject.getNotation();
-      if (notation != null && notation.equals("URI")) {
+      if (notation != null && notation.equals(URI)) {
         atts.clear();
-        atts.addAttribute("xlink:href", "CDATA",
+        atts.addAttribute(XLINK_HREF, CDATA,
                           subject.getAddress());
-        dh.startElement("resourceRef", atts);
-        dh.endElement("resourceRef");
+        dh.startElement(RESOURCEREF, atts);
+        dh.endElement(RESOURCEREF);
         identityFound = true;
       } else
         reportInvalidLocator(subject);
@@ -328,18 +334,18 @@ public class XTMFragmentExporter extends XTMTopicMapExporter {
     while (it.hasNext()) {
       LocatorIF indicator = (LocatorIF) it.next();
       String notation = indicator.getNotation();
-      if (notation != null && notation.equals("URI")) {
+      if (notation != null && notation.equals(URI)) {
         atts.clear();
         String ref = getSubjectIndicatorRef(topic, indicator);
-        atts.addAttribute("xlink:href", "CDATA", ref);
-        dh.startElement("subjectIndicatorRef", atts);
-        dh.endElement("subjectIndicatorRef");
+        atts.addAttribute(XLINK_HREF, CDATA, ref);
+        dh.startElement(SUBJECTINDICATORREF, atts);
+        dh.endElement(SUBJECTINDICATORREF);
 
         if (ref.startsWith("#")) {
           atts.clear();
-          atts.addAttribute("xlink:href", "CDATA", indicator.getAddress());
-          dh.startElement("subjectIndicatorRef", atts);
-          dh.endElement("subjectIndicatorRef");
+          atts.addAttribute(XLINK_HREF, CDATA, indicator.getAddress());
+          dh.startElement(SUBJECTINDICATORREF, atts);
+          dh.endElement(SUBJECTINDICATORREF);
         }
         identityFound = true;
       } else
@@ -353,12 +359,12 @@ public class XTMFragmentExporter extends XTMTopicMapExporter {
         while (it.hasNext()) {
           LocatorIF srcloc = (LocatorIF) it.next();
           String notation = srcloc.getNotation();
-          if (notation != null && notation.equals("URI")) {
+          if (notation != null && notation.equals(URI)) {
             atts.clear();
-            atts.addAttribute("xlink:href", "CDATA",
+            atts.addAttribute(XLINK_HREF, CDATA,
                               srcloc.getAddress());
-            dh.startElement("topicRef", atts);
-            dh.endElement("topicRef");
+            dh.startElement(TOPICREF, atts);
+            dh.endElement(TOPICREF);
             identityFound = true;
           } else
             reportInvalidLocator(srcloc);
@@ -371,9 +377,9 @@ public class XTMFragmentExporter extends XTMTopicMapExporter {
       String reference = makeVirtualReference(topic);
       
       atts.clear();
-      atts.addAttribute("xlink:href", "CDATA", reference);
-      dh.startElement("topicRef", atts);
-      dh.endElement("topicRef");
+      atts.addAttribute(XLINK_HREF, CDATA, reference);
+      dh.startElement(TOPICREF, atts);
+      dh.endElement(TOPICREF);
     }
     
     dh.endElement("subjectIdentity");
@@ -431,11 +437,11 @@ public class XTMFragmentExporter extends XTMTopicMapExporter {
         if (locator_handler != null)
           occloc = locator_handler.process(occloc);
         String notation = occloc.getNotation();
-        if (notation != null && notation.equals("URI")) {
+        if (notation != null && notation.equals(URI)) {
           atts.clear();
-          atts.addAttribute("xlink:href", "CDATA", occloc.getAddress());
-          dh.startElement("resourceRef", atts);
-          dh.endElement("resourceRef");
+          atts.addAttribute(XLINK_HREF, CDATA, occloc.getAddress());
+          dh.startElement(RESOURCEREF, atts);
+          dh.endElement(RESOURCEREF);
         } else
           reportInvalidLocator(occloc);
       }

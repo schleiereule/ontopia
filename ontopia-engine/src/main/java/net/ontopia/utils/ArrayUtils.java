@@ -29,6 +29,7 @@ import java.util.Random;
  */
 
 public class ArrayUtils {
+  private static final String NULL = "null";
 
   protected static final Random random = new Random();
 
@@ -74,42 +75,42 @@ public class ArrayUtils {
 
   public static String toString(Object[] array) {
     if (array == null)
-      return "null";
+      return NULL;
     else
       return Arrays.asList(array).toString();
   }
 
   public static String toString(boolean[] array) {
     if (array == null)
-      return "null";
+      return NULL;
     else
       return "[" + StringUtils.join(array, ", ") + "]";
   }
 
   public static String toString(byte[] array) {
     if (array == null)
-      return "null";
+      return NULL;
     else
       return "[" + StringUtils.join(array, ", ") + "]";
   }
 
   public static String toString(char[] array) {
     if (array == null)
-      return "null";
+      return NULL;
     else
       return "[" + StringUtils.join(array, ", ") + "]";
   }
 
   public static String toString(int[] array) {
     if (array == null)
-      return "null";
+      return NULL;
     else
       return "[" + StringUtils.join(array, ", ") + "]";
   }
 
   public static String toString(long[] array) {
     if (array == null)
-      return "null";
+      return NULL;
     else
       return "[" + StringUtils.join(array, ", ") + "]";
   }

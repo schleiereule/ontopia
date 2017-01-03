@@ -57,6 +57,8 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
   private static final Logger log = LoggerFactory
       .getLogger(JTMTopicMapWriter.class.getName());
 
+  private static final String TYPE = "type";
+  private static final String SI = "si:";
   private final static String VERSION = "1.0";
 
   private JSONWriter writer;
@@ -187,7 +189,6 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
    * 
    * @param tm the topic map to be serialized as JTM.
    */
-  @SuppressWarnings("unchecked")
   private void serializeTopicMap(TopicMapIF tm) throws IOException {
     // ----------------- Topics --------------------
     Collection<TopicIF> topics = tm.getTopics();
@@ -241,7 +242,6 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
    * @param topic the topic to be serialized.
    * @param topLevel if the element is serialized as top-level element.
    */
-  @SuppressWarnings("unchecked")
   private void serializeTopic(TopicIF topic, boolean topLevel)
       throws IOException {
     if (!topLevel) {
@@ -281,7 +281,6 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
    * @param association the association to be serialized.
    * @param topLevel if the element is serialized as top-level element.
    */
-  @SuppressWarnings("unchecked")
   private void serializeAssociation(AssociationIF association, boolean topLevel)
       throws IOException {
     if (!topLevel) {
@@ -321,7 +320,7 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
     
     writer.
       pair("player", getTopicRef(role.getPlayer())).
-      pair("type", getTopicRef(role.getType()));
+      pair(TYPE, getTopicRef(role.getType()));
     
     serializeItemIdentifiers(role);
     serializeReifier(role);
@@ -337,19 +336,19 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
    */
   private void serializeTypeInstanceAssociation(TopicIF type, TopicIF instance)
       throws IOException {
-    writer.object().pair("type", "si:" + PSI.getSAMTypeInstance().getExternalForm());
+    writer.object().pair(TYPE, SI + PSI.getSAMTypeInstance().getExternalForm());
     writer.key("roles").array();
     
     // Type Role
     writer.object();
     writer.pair("player", getTopicRef(type));
-    writer.pair("type", "si:" + PSI.getSAMType().getExternalForm());
+    writer.pair(TYPE, SI + PSI.getSAMType().getExternalForm());
     writer.endObject();
 
     // Instance Role
     writer.object();
     writer.pair("player", getTopicRef(instance));
-    writer.pair("type", "si:" + PSI.getSAMInstance().getExternalForm());
+    writer.pair(TYPE, SI + PSI.getSAMInstance().getExternalForm());
     writer.endObject();
     
     writer.endArray();
@@ -362,7 +361,6 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
    * @param name the name to be serialized.
    * @param topLevel if the element is serialized as top-level element.
    */
-  @SuppressWarnings("unchecked")
   private void serializeName(TopicNameIF name, boolean topLevel)
       throws IOException {
     if (!topLevel) {
@@ -476,7 +474,6 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
    * 
    * @param obj the {@link TMObjectIF} to be serialized.
    */
-  @SuppressWarnings("unchecked")
   private void serializeItemIdentifiers(TMObjectIF obj)
       throws IOException {
     Collection<LocatorIF> ids = obj.getItemIdentifiers();
@@ -489,7 +486,6 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
    * 
    * @param topic the {@link TopicIF} to be serialized.
    */
-  @SuppressWarnings("unchecked")
   private void serializeSubjectIdentifiers(TopicIF topic)
       throws IOException {
     Collection<LocatorIF> sids = topic.getSubjectIdentifiers();
@@ -502,7 +498,6 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
    * 
    * @param topic the {@link TopicIF} to be serialized.
    */
-  @SuppressWarnings("unchecked")
   private void serializeSubjectLocators(TopicIF topic)
       throws IOException {
     Collection<LocatorIF> slocs = topic.getSubjectLocators();
@@ -532,7 +527,6 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
    * 
    * @param obj the scoped object to be used.
    */
-  @SuppressWarnings("unchecked")
   private void serializeScope(ScopedIF obj)
       throws IOException {
     Collection<TopicIF> scopes = obj.getScope();
@@ -555,7 +549,7 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
       throws IOException {
     TopicIF type = obj.getType();
     if (type != null) {
-      writer.pair("type", getTopicRef(type));
+      writer.pair(TYPE, getTopicRef(type));
     }
   }
 
@@ -684,7 +678,7 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
       // should not happen, as every topic needs to have one of them
       log.warn("Topic with objectID:" + ref.getObjectId()
           + " has not a single item/subject identifier or locator.");
-      return new String("");
+      return "";
     }
   }
   
@@ -710,16 +704,16 @@ public class JTMTopicMapWriter implements TopicMapWriterIF {
       sb.append("ii:");
       String id = normaliseLocatorReference(loc);
       if (!id.startsWith("http://") && !id.startsWith("#")) {
-        sb.append("#");
+        sb.append('#');
       }
       sb.append(id);
       break;
     case SID:
-      sb.append("si:");
+      sb.append(SI);
       sb.append(loc.getAddress());
       break;
     case SL:
-      sb.append("si:");
+      sb.append(SI);
       sb.append(loc.getAddress());
       break;
     }

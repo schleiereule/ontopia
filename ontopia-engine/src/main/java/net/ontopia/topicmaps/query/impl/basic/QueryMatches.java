@@ -684,19 +684,16 @@ public class QueryMatches {
   // ===== DEBUG METHODS =====================================================
   
   public String dump() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("------------------------------------------------------------------------------\n");
+    StringBuilder sb = new StringBuilder(500)
+        .append("------------------------------------------------------------------------------\n");
     StringUtils.join(columnDefinitions, " | ", sb);
-    sb.append("\n");
-    sb.append("------------------------------------------------------------------------------\n");
+    sb.append("\n------------------------------------------------------------------------------\n");
     for (int r=0; r <= last; r++) {
-      sb.append("[");
+      sb.append('[');
       for (int c = 0; c < columnDefinitions.length-1; c++) {
-        sb.append(toString(data[r][c]));
-        sb.append(", ");
+        sb.append(toString(data[r][c])).append(", ");
       }
-      sb.append(toString(data[r][columnDefinitions.length-1]));
-      sb.append("]\n");
+      sb.append(toString(data[r][columnDefinitions.length-1])).append("]\n");
     }
     sb.append((last+1) + " rows");
     return sb.toString();

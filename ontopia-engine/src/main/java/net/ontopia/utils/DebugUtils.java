@@ -27,7 +27,7 @@ public class DebugUtils {
 
   public static String decodeString(String str) {
     StringBuilder buf = new StringBuilder(str.length() * 5);
-    buf.append(str + " [");
+    buf.append(str).append(" [");
 
     for (int ix = 0; ix < str.length(); ix++) {
       if (ix > 0)
@@ -35,7 +35,7 @@ public class DebugUtils {
       buf.append((int) str.charAt(ix));
     }
     
-    buf.append("]");
+    buf.append(']');
 
     return buf.toString();
   }
@@ -62,7 +62,7 @@ public class DebugUtils {
       }
     }
     
-    list.append("]");
+    list.append(']');
     return list.toString();
   }
 
@@ -81,7 +81,7 @@ public class DebugUtils {
       }
     }
     
-    list.append("]");
+    list.append(']');
     return list.toString();
   }  
 }

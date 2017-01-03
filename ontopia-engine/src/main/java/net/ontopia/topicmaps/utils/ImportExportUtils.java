@@ -50,6 +50,8 @@ import org.slf4j.LoggerFactory;
  * @since 1.2
  */
 public class ImportExportUtils {
+  private static final String ONTOPIA_RDBMS_URI_PREFIX = "x-ontopia:tm-rdbms:";
+  private static final String TMX_EXTENSION = ".tmx";// todo: generalize
 
   private static Set<ImportExportServiceIF> services;
   
@@ -86,7 +88,7 @@ public class ImportExportUtils {
   public static TopicMapReaderIF getReader (String propfile,
       String filename_or_url) {
 
-    if (filename_or_url.startsWith ("x-ontopia:tm-rdbms:"))
+    if (filename_or_url.startsWith (ONTOPIA_RDBMS_URI_PREFIX))
       return new RDBMSTopicMapReader (propfile, getTopicMapId (filename_or_url));
     // Otherwise fall back to the property-less getReader method
     return getReader (filename_or_url);
@@ -104,7 +106,7 @@ public class ImportExportUtils {
   public static TopicMapReaderIF getReader (Map<String, String> properties,
       String filename_or_url) {
 
-    if (filename_or_url.startsWith ("x-ontopia:tm-rdbms:"))
+    if (filename_or_url.startsWith (ONTOPIA_RDBMS_URI_PREFIX))
       return new RDBMSTopicMapReader (properties,
           getTopicMapId (filename_or_url));
     // Otherwise fall back to the property-less getReader method
@@ -143,13 +145,13 @@ public class ImportExportUtils {
   public static TopicMapReaderIF getReader (LocatorIF url) {
     String address = url.getAddress ();
 
-    if (address.startsWith ("x-ontopia:tm-rdbms:"))
+    if (address.startsWith (ONTOPIA_RDBMS_URI_PREFIX))
       return new RDBMSTopicMapReader (getTopicMapId (address));
     else if (address.endsWith (".xtm"))
       return new XTMTopicMapReader (url);
     else if (address.endsWith (".ltm"))
       return new LTMTopicMapReader (url);
-    else if (address.endsWith (".tmx"))
+    else if (address.endsWith (TMX_EXTENSION))
       return new TMXMLReader (url);
     else if (address.endsWith (".xml"))
       return new TMXMLReader(url); 
@@ -190,7 +192,7 @@ public class ImportExportUtils {
       return new XTMTopicMapReader (url);
     else if (address.endsWith (".ltm"))
       return new LTMTopicMapReader (url);
-    else if (address.endsWith (".tmx"))
+    else if (address.endsWith (TMX_EXTENSION))
       return new TMXMLReader (url);
     else if (address.endsWith (".xml"))
       return new TMXMLReader(url); 
@@ -217,7 +219,7 @@ public class ImportExportUtils {
       throws java.io.IOException {
     if (tmfile.endsWith (".ltm"))
       return new LTMTopicMapWriter (new FileOutputStream (tmfile));
-    else if (tmfile.endsWith (".tmx"))
+    else if (tmfile.endsWith (TMX_EXTENSION))
       return new TMXMLWriter (tmfile);
     else if (tmfile.endsWith (".xtm1"))
       return new XTMTopicMapWriter (new File (tmfile));
@@ -243,7 +245,7 @@ public class ImportExportUtils {
     if (encoding == null)
       return getWriter(tmfile);
 
-    if (tmfile.endsWith(".tmx"))
+    if (tmfile.endsWith(TMX_EXTENSION))
       return new TMXMLWriter (tmfile, encoding);
     else if (tmfile.endsWith(".xtm1"))
       return new XTMTopicMapWriter(new File(tmfile), encoding);
@@ -260,9 +262,9 @@ public class ImportExportUtils {
     int offset = 0;
     if (address.startsWith("M"))
       offset = 1;
-    else if (address.startsWith("x-ontopia:tm-rdbms:")) {
+    else if (address.startsWith(ONTOPIA_RDBMS_URI_PREFIX)) {
       // Syntax: x-ontopia:tm-rdbms:12345
-      offset = "x-ontopia:tm-rdbms:".length ();
+      offset = ONTOPIA_RDBMS_URI_PREFIX.length ();
       
       // Ignore M suffix on topic map id
       if (address.charAt (offset) == 'M')

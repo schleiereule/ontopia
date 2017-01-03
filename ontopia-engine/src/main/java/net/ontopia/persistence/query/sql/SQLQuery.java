@@ -141,12 +141,11 @@ public class SQLQuery {
   }
 
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("select ");
+    StringBuilder sb = new StringBuilder("select ");
     if (getDistinct())
       sb.append("distinct ");
     if (select == null || select.isEmpty())
-      sb.append("*");
+      sb.append('*');
     else
       StringUtils.join(select, ", ", sb);
     if (getFilter() != null) {

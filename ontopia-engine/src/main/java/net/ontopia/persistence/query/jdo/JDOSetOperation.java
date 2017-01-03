@@ -85,9 +85,9 @@ public class JDOSetOperation implements JDOExpressionIF {
     default:
       throw new OntopiaRuntimeException("Unsupported set operator: '" + operator + "'");
     }
-    sb.append("(");
+    sb.append('(');
     StringUtils.join(sets, op, sb);
-    sb.append(")");
+    sb.append(')');
     return sb.toString();
   }
 

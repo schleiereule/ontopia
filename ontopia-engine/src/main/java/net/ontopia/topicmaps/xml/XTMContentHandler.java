@@ -156,6 +156,10 @@ public class XTMContentHandler extends AbstractTopicMapContentHandler
   private static final String EL_TOPICREF = "topicRef";
   private static final String EL_VARIANT = "variant";
   private static final String EL_VARIANTNAME = "variantName";
+  private static final String EL_HREF = "href";
+  private static final String EL_XLINK_HREF = "xlink:href";
+  private static final String MSG_MERGED_WITH = " merged with ";
+  private static final String MSG_TOPIC = "Topic ";
   
   public static final String NS_XTM = "http://www.topicmaps.org/xtm/1.0/";
   public static final String NS_XLINK = "http://www.w3.org/1999/xlink";
@@ -330,9 +334,9 @@ public class XTMContentHandler extends AbstractTopicMapContentHandler
       if (EL_TOPICREF.equals(qName)) {
         
         // Resolve reference
-        String href = atts.getValue(NS_XLINK, "href");
+        String href = atts.getValue(NS_XLINK, EL_HREF);
         if (href == null)
-          href = atts.getValue("xlink:href");
+          href = atts.getValue(EL_XLINK_HREF);
 
         // Process in context of parent
         String parent_type = parents.peek();        
@@ -502,9 +506,9 @@ public class XTMContentHandler extends AbstractTopicMapContentHandler
       else if (EL_RESOURCEREF.equals(qName)) {
         
         // Create locator
-        String href = atts.getValue(NS_XLINK, "href");
+        String href = atts.getValue(NS_XLINK, EL_HREF);
         if (href == null)
-          href = atts.getValue("xlink:href");
+          href = atts.getValue(EL_XLINK_HREF);
         
         // Process in context of parent
         String parent_type = parents.peek();
@@ -578,7 +582,7 @@ public class XTMContentHandler extends AbstractTopicMapContentHandler
               
             } else if (other_topic != current_topic) {
               if (log.isInfoEnabled())
-                log.debug("Topic " + current_topic + " merged with " + other_topic +
+                log.debug(MSG_TOPIC + current_topic + MSG_MERGED_WITH + other_topic +
                     " because they both have the same addressable subject: " + subject);
               
               // Merge existing topic with current topic. 
@@ -669,9 +673,9 @@ public class XTMContentHandler extends AbstractTopicMapContentHandler
       else if (EL_SUBJECTINDICATORREF.equals(qName)) {
         
         // Get reference
-        String href = atts.getValue(NS_XLINK, "href");
+        String href = atts.getValue(NS_XLINK, EL_HREF);
         if (href == null)
-          href = atts.getValue("xlink:href");
+          href = atts.getValue(EL_XLINK_HREF);
         LocatorIF indicator = createLocator(href);
         
         // Process in context of parent
@@ -719,9 +723,9 @@ public class XTMContentHandler extends AbstractTopicMapContentHandler
       else if (EL_MERGEMAP.equals(qName)) {
         
         // Get merge map address
-        String href = atts.getValue(NS_XLINK, "href");
+        String href = atts.getValue(NS_XLINK, EL_HREF);
         if (href == null)
-          href = atts.getValue("xlink:href");
+          href = atts.getValue(EL_XLINK_HREF);
         
         // Put merge map on info map
         ExternalDocument merge_map = new ExternalDocument(createLocator(href));
@@ -1118,7 +1122,7 @@ public class XTMContentHandler extends AbstractTopicMapContentHandler
     if (tsrcloc != null) {
       if (topic != null && tsrcloc != topic) {
         if (log.isInfoEnabled())
-          log.debug("Topic " + topic + " merged with " + tsrcloc +
+          log.debug(MSG_TOPIC + topic + MSG_MERGED_WITH + tsrcloc +
               " because the subject indicator is the same as the source locator of the other: " + locator);
         tsrcloc.merge(topic);
       }
@@ -1141,7 +1145,7 @@ public class XTMContentHandler extends AbstractTopicMapContentHandler
     if (tsrcloc != null) {
       if (topic != null && tsrcloc != topic) {
         if (log.isInfoEnabled())
-          log.debug("Topic " + topic + " merged with " + tsrcloc +
+          log.debug(MSG_TOPIC + topic + MSG_MERGED_WITH + tsrcloc +
               " because the subject indicator is the same as the source locator of the other: " + locator);
         tsrcloc.merge(topic);
       }
@@ -1166,7 +1170,7 @@ public class XTMContentHandler extends AbstractTopicMapContentHandler
       TopicIF tsrcloc = (TopicIF)osrcloc;
       if (topic != null && tsrcloc != topic) {
         if (log.isInfoEnabled())
-          log.debug("Topic " + topic + " merged with " + tsrcloc +
+          log.debug(MSG_TOPIC + topic + MSG_MERGED_WITH + tsrcloc +
               " because the subject indicator is the same as the source locator of the other: " + locator);
         // ISSUE: should we keep the oldest topic in this case? or
         // perhaps the one with the indicator
@@ -1307,7 +1311,7 @@ public class XTMContentHandler extends AbstractTopicMapContentHandler
       
       if (current_topic != referenced_topic) {
         if (log.isInfoEnabled())
-          log.debug("Topic " + current_topic + " merged with " + referenced_topic +
+          log.debug(MSG_TOPIC + current_topic + MSG_MERGED_WITH + referenced_topic +
           " because it is an addressable subject (subjectIndentity>:<topicRef>)");
         
         // merge referenced topic with current topic.

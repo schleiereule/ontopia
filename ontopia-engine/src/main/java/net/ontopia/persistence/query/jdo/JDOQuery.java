@@ -217,7 +217,7 @@ public class JDOQuery {
     if (getDistinct())
       sb.append("distinct ");
     if (select == null || select.isEmpty())
-      sb.append("*");
+      sb.append('*');
     else
       StringUtils.join(select, ", ", sb);
     if (getFilter() != null) {

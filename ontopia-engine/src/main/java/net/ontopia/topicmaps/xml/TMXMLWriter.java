@@ -64,6 +64,8 @@ import org.xml.sax.helpers.AttributeListImpl;
  */
 public class TMXMLWriter extends AbstractTopicMapExporter
   implements TopicMapWriterIF {
+  private static final String CDATA = "CDATA";
+  private static final String SCOPE = "scope";
   public static final String PROPERTY_PREFIXES = "prefixes";
   public static final String PROPERTY_DOCUMENT_ELEMENT = "documentElement";
   protected static final AttributeListImpl EMPTY_ATTR_LIST = new AttributeListImpl();
@@ -214,7 +216,7 @@ public class TMXMLWriter extends AbstractTopicMapExporter
       String nsuri = (String) it.next();
       String prefix = (String) nsuris.get(nsuri);
 
-      atts.addAttribute("xmlns:" + prefix, "CDATA", nsuri);
+      atts.addAttribute("xmlns:" + prefix, CDATA, nsuri);
     }
 
     if (topicmap != null) // topic map can be null in some situations (particularly when using tmrap)
@@ -260,7 +262,7 @@ public class TMXMLWriter extends AbstractTopicMapExporter
     if (typeit.hasNext())
       elem = getElementTypeName((TopicIF) typeit.next(), TOPIC);
     
-    atts.addAttribute("id", "CDATA", getTopicId(topic));
+    atts.addAttribute("id", CDATA, getTopicId(topic));
     out.startElement(elem, atts);
     atts.clear();
     
@@ -290,7 +292,7 @@ public class TMXMLWriter extends AbstractTopicMapExporter
 
       String scope = getScope(bn);
       if (scope != null)
-        atts.addAttribute("scope", "CDATA", scope);
+        atts.addAttribute(SCOPE, CDATA, scope);
 
       addReifierAttribute(bn, atts);
       
@@ -307,9 +309,9 @@ public class TMXMLWriter extends AbstractTopicMapExporter
         atts.clear();
         scope = getScope(vn);
         if (scope != null)
-          atts.addAttribute("scope", "CDATA", scope);
+          atts.addAttribute(SCOPE, CDATA, scope);
         if (ObjectUtils.different(vn.getDataType(), DataTypes.TYPE_STRING))
-          atts.addAttribute("datatype", "CDATA", vn.getDataType().getAddress());
+          atts.addAttribute("datatype", CDATA, vn.getDataType().getAddress());
 
         addReifierAttribute(vn, atts);
         
@@ -331,9 +333,9 @@ public class TMXMLWriter extends AbstractTopicMapExporter
 
       String scope = getScope(occ);
       if (scope != null && filterOk(scope))
-        atts.addAttribute("scope", "CDATA", scope);
+        atts.addAttribute(SCOPE, CDATA, scope);
       if (ObjectUtils.different(occ.getDataType(), DataTypes.TYPE_STRING))
-        atts.addAttribute("datatype", "CDATA", occ.getDataType().getAddress());
+        atts.addAttribute("datatype", CDATA, occ.getDataType().getAddress());
 
       addReifierAttribute(occ, atts);
 
@@ -348,9 +350,9 @@ public class TMXMLWriter extends AbstractTopicMapExporter
     // if so, we can output them as associations here)
     while (typeit.hasNext()) {
       TopicIF type = (TopicIF) typeit.next();
-      atts.addAttribute("role", "CDATA", "xtm:instance");
-      atts.addAttribute("otherrole", "CDATA", "xtm:class");
-      atts.addAttribute("topicref", "CDATA", getTopicId(type));
+      atts.addAttribute("role", CDATA, "xtm:instance");
+      atts.addAttribute("otherrole", CDATA, "xtm:class");
+      atts.addAttribute("topicref", CDATA, getTopicId(type));
       out.startElement("xtm:class-instance", atts);
       out.endElement("xtm:class-instance");
       atts.clear();
@@ -370,8 +372,8 @@ public class TMXMLWriter extends AbstractTopicMapExporter
       String assocelem = getElementTypeName(assoc.getType(), ASSOCIATION);
       String scope = getScope(assoc);
       if (scope != null)
-        atts.addAttribute("scope", "CDATA", scope);
-      atts.addAttribute("role", "CDATA",
+        atts.addAttribute(SCOPE, CDATA, scope);
+      atts.addAttribute("role", CDATA,
                         getElementTypeName(role.getType(), ROLE));
 
       addReifierAttribute(assoc, atts);
@@ -392,9 +394,9 @@ public class TMXMLWriter extends AbstractTopicMapExporter
         if (otherrole != null && otherrole.getPlayer() != null) {
           // if unary we skip spec of the other role
           // also skip if player is null
-          atts.addAttribute("topicref", "CDATA",
+          atts.addAttribute("topicref", CDATA,
                             getTopicId(otherrole.getPlayer()));
-          atts.addAttribute("otherrole", "CDATA",
+          atts.addAttribute("otherrole", CDATA,
                             getElementTypeName(otherrole.getType(), ROLE));
         }
         out.startElement(assocelem, atts);
@@ -410,7 +412,7 @@ public class TMXMLWriter extends AbstractTopicMapExporter
             continue; // this is our role, which is already covered
 
           atts.clear();
-          atts.addAttribute("topicref", "CDATA", getTopicId(r.getPlayer()));
+          atts.addAttribute("topicref", CDATA, getTopicId(r.getPlayer()));
           String roleelem = getElementTypeName(r.getType(), ROLE);
           out.startElement(roleelem, atts);
           out.endElement(roleelem);
@@ -637,7 +639,7 @@ public class TMXMLWriter extends AbstractTopicMapExporter
     if (reifier != null) {
       if (filter == null || filter.ok(reifier)) {
         String reifierAttribute = getTopicId(reifier);
-        atts.addAttribute("reifier", "CDATA", reifierAttribute);
+        atts.addAttribute("reifier", CDATA, reifierAttribute);
       }
     }
   }

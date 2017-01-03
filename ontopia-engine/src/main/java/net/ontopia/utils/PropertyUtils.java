@@ -90,7 +90,7 @@ public class PropertyUtils {
     if (property_value == null)
       return default_value;
     else
-      return (property_value.equalsIgnoreCase("true") || property_value.equalsIgnoreCase("yes"));
+      return ("true".equalsIgnoreCase(property_value) || "yes".equalsIgnoreCase(property_value));
   }
   
   /**

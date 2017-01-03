@@ -86,7 +86,7 @@ public class TestFileUtils {
                                  resourcesDirectory);
     List<String[]> tests = new ArrayList<String[]>();
     for (String resource : resources) {
-      int slashPos = resource.lastIndexOf("/") + 1;
+      int slashPos = resource.lastIndexOf('/') + 1;
       String root = resource.substring(0, slashPos);
       String filename = resource.substring(slashPos);
       tests.add(new String[] {root, filename});
@@ -190,7 +190,7 @@ public class TestFileUtils {
   public static void transferTestInputDirectory(ResourcesDirectoryReader directoryReader) throws IOException {
     Set<String> resources = directoryReader.getResources();
     for (String resource : resources) {
-      int slashPos = resource.lastIndexOf("/") + 1;
+      int slashPos = resource.lastIndexOf('/') + 1;
       String root = resource.substring(testdataInputRoot.length(), slashPos);
       String filename = resource.substring(slashPos);
       getTransferredTestInputFile(root, filename);

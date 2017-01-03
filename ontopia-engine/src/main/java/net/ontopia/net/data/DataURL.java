@@ -175,8 +175,7 @@ public class DataURL {
     if (mediaType != null && !mediaType.equals("text/plain"))
       sb.append(mediaType);
     if (base64) sb.append(";base64");
-    sb.append(",");
-    sb.append(URLEncoder.encode(getEncodedContents()));
+    sb.append(',').append(URLEncoder.encode(getEncodedContents()));
     return sb.toString();
   }
 

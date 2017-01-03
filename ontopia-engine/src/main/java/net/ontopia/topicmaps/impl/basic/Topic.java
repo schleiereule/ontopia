@@ -105,7 +105,7 @@ public class Topic extends TMObject implements TopicIF {
 
   public void addSubjectLocator(LocatorIF subject_locator) throws ConstraintViolationException {
     if (subject_locator == null)
-      throw new NullPointerException("null is not a valid argument.");
+      throw new NullPointerException(MSG_NULL_ARGUMENT);
     // Notify topic map
     if (!isConnected())
       throw new ConstraintViolationException("Cannot modify subject locator when topic isn't attached to a topic map.");
@@ -122,7 +122,7 @@ public class Topic extends TMObject implements TopicIF {
 
   public void removeSubjectLocator(LocatorIF subject_locator) {
     if (subject_locator == null)
-      throw new NullPointerException("null is not a valid argument.");
+      throw new NullPointerException(MSG_NULL_ARGUMENT);
     // Notify topic map
     if (!isConnected())
       throw new ConstraintViolationException("Cannot modify subject locator when topic isn't attached to a topic map.");
@@ -144,7 +144,7 @@ public class Topic extends TMObject implements TopicIF {
 
   public void addSubjectIdentifier(LocatorIF subject_indicator) throws ConstraintViolationException {
     if (subject_indicator == null)
-      throw new NullPointerException("null is not a valid argument.");
+      throw new NullPointerException(MSG_NULL_ARGUMENT);
     // Notify topic map
     if (!isConnected())
       throw new ConstraintViolationException("Cannot modify subject indicator when topic isn't attached to a topic map.");
@@ -161,7 +161,7 @@ public class Topic extends TMObject implements TopicIF {
 
   public void removeSubjectIdentifier(LocatorIF subject_indicator) {
     if (subject_indicator == null)
-      throw new NullPointerException("null is not a valid argument.");
+      throw new NullPointerException(MSG_NULL_ARGUMENT);
     // Notify topic map
     if (!isConnected())
       throw new ConstraintViolationException("Cannot modify subject indicator when topic isn't attached to a topic map.");
@@ -182,7 +182,7 @@ public class Topic extends TMObject implements TopicIF {
   protected void addTopicName(TopicNameIF _name) {
     TopicName name = (TopicName)_name;
     if (name == null)
-      throw new NullPointerException("null is not a valid argument.");
+      throw new NullPointerException(MSG_NULL_ARGUMENT);
     // Check to see if name is already a member of this topic
     if (name.parent == this)
       return;
@@ -200,7 +200,7 @@ public class Topic extends TMObject implements TopicIF {
   protected void removeTopicName(TopicNameIF _name) {
     TopicName name = (TopicName)_name;
     if (name == null)
-      throw new NullPointerException("null is not a valid argument.");
+      throw new NullPointerException(MSG_NULL_ARGUMENT);
     // Check to see if name is not a member of this topic
     if (name.parent != this)
       return;
@@ -239,7 +239,7 @@ public class Topic extends TMObject implements TopicIF {
   protected void addOccurrence(OccurrenceIF _occurrence) {
     Occurrence occurrence = (Occurrence)_occurrence;
     if (occurrence == null)
-      throw new NullPointerException("null is not a valid argument.");
+      throw new NullPointerException(MSG_NULL_ARGUMENT);
     // Check to see if occurrence is already a member of this topic
     if (occurrence.parent == this)
       return;
@@ -257,7 +257,7 @@ public class Topic extends TMObject implements TopicIF {
   protected void removeOccurrence(OccurrenceIF _occurrence) {
     Occurrence occurrence = (Occurrence)_occurrence;
     if (occurrence == null)
-      throw new NullPointerException("null is not a valid argument.");
+      throw new NullPointerException(MSG_NULL_ARGUMENT);
     // Check to see if occurrence is not a member of this topic
     if (occurrence.parent != this)
       return;
@@ -378,7 +378,7 @@ public class Topic extends TMObject implements TopicIF {
 
   public void addType(TopicIF type) {
     if (type == null)
-      throw new NullPointerException("null is not a valid argument.");
+      throw new NullPointerException(MSG_NULL_ARGUMENT);
     CrossTopicMapException.check(type, this);
     // Notify listeners
     fireEvent(TopicIF.EVENT_ADD_TYPE, type, null);
@@ -388,7 +388,7 @@ public class Topic extends TMObject implements TopicIF {
 
   public void removeType(TopicIF type) {
     if (type == null)
-      throw new NullPointerException("null is not a valid argument.");
+      throw new NullPointerException(MSG_NULL_ARGUMENT);
     CrossTopicMapException.check(type, this);
     // Notify listeners
     fireEvent(TopicIF.EVENT_REMOVE_TYPE, null, type);
