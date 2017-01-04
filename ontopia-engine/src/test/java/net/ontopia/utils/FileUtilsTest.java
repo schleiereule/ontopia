@@ -113,12 +113,14 @@ public class FileUtilsTest extends TestCase {
     // Create file and attempt to delete it
     File file = File.createTempFile("FILEUTILS", "TEST", testdir);
     FileUtils.delete(file, false);
+    assertFalse(file.exists());
   }
   
   public void testDeleteRecursive_file() throws IOException {
     // Create file and attempt to delete it
     File file = File.createTempFile("FILEUTILS", "TEST", testdir);
     FileUtils.delete(file, true);
+    assertFalse(file.exists());
   }
 
   // recursive delete
@@ -127,12 +129,14 @@ public class FileUtilsTest extends TestCase {
     File dir = createNestedDirectory();
     // This should work
     FileUtils.deleteDirectory(dir, true);
+    assertFalse(dir.exists());
   }
   
   public void testDeleteRecursive_dir() throws IOException {
     File dir = createNestedDirectory();
     // This should work
     FileUtils.delete(dir, true);
+    assertFalse(dir.exists());
   }
 
   /**
