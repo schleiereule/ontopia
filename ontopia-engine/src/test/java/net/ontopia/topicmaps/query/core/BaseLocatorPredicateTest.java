@@ -43,7 +43,7 @@ public class BaseLocatorPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "BASE", topicmap.getStore().getBaseAddress().getAddress());
     
-    verifyQuery(matches, "base-locator($BASE)?");
+    assertQueryMatches(matches, "base-locator($BASE)?");
   }
   
   public void testCompletelyOpenNoValue() throws InvalidQueryException, IOException {
@@ -53,14 +53,14 @@ public class BaseLocatorPredicateTest extends AbstractPredicateTest {
     // gets base locator implicitly.
     if (topicmap.getStore().getBaseAddress() == null) {
       List matches = new ArrayList();    
-      verifyQuery(matches, "base-locator($BASE)?");
+      assertQueryMatches(matches, "base-locator($BASE)?");
     }
   }
 
   public void testWithSpecificValueFalse() throws InvalidQueryException, IOException {
     load("jill.xtm");
 
-    findNothing(OPT_TYPECHECK_OFF +
+    assertFindNothing(OPT_TYPECHECK_OFF +
                 "base-locator(jillstm)?");
   }
 
@@ -68,14 +68,14 @@ public class BaseLocatorPredicateTest extends AbstractPredicateTest {
     load("jill.xtm");
 
     List matches = new ArrayList();    
-    verifyQuery(matches, "base-locator(\"jillstm\")?");
+    assertQueryMatches(matches, "base-locator(\"jillstm\")?");
   }
 
   public void testWithSpecificValueFalse3() throws InvalidQueryException, IOException{
     makeEmpty();
 
     List matches = new ArrayList();    
-    verifyQuery(matches, "base-locator(\"file://tst.xtm\")?");
+    assertQueryMatches(matches, "base-locator(\"file://tst.xtm\")?");
   }
   
   public void testWithSpecificValueTrue() throws InvalidQueryException, IOException {
@@ -85,7 +85,7 @@ public class BaseLocatorPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     matches.add(new HashMap());
     
-    verifyQuery(matches, "base-locator(\"" + base + "\")?");
+    assertQueryMatches(matches, "base-locator(\"" + base + "\")?");
   }
   
 }

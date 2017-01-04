@@ -37,9 +37,9 @@ public class TopicMapSourceManagerTest extends TestCase {
   // --- Test cases
 
   public void testEmpty() {
-    verifyEmptyManager("");
+    assertEmptyManager("");
     manager.refresh();
-    verifyEmptyManager(" after refresh");
+    assertEmptyManager(" after refresh");
   }
 
   public void testSingleSourceSingleRef() {
@@ -70,7 +70,7 @@ public class TopicMapSourceManagerTest extends TestCase {
 
     manager.removeSource(source);
     manager.refresh();
-    verifyEmptyManager(" after removal");
+    assertEmptyManager(" after removal");
 
     manager.removeSource(source); // checking that it's OK
   }
@@ -109,7 +109,7 @@ public class TopicMapSourceManagerTest extends TestCase {
 
     manager.removeSource(source);
     manager.refresh();
-    verifyEmptyManager(" after removal");
+    assertEmptyManager(" after removal");
 
     manager.removeSource(source); // checking that it's OK
   }
@@ -153,7 +153,7 @@ public class TopicMapSourceManagerTest extends TestCase {
     manager.removeSource(source);
     manager.removeSource(source2);
     manager.refresh();
-    verifyEmptyManager(" after removal");
+    assertEmptyManager(" after removal");
 
     manager.removeSource(source); // checking that it's OK
   }
@@ -161,7 +161,7 @@ public class TopicMapSourceManagerTest extends TestCase {
   
   // --- INTERNAL METHODS
 
-  private void verifyEmptyManager(String suffix) {
+  private void assertEmptyManager(String suffix) {
     assertTrue("id collection not empty" + suffix,
            manager.getIds().size() == 0);
 

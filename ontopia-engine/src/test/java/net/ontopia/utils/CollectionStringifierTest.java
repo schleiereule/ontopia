@@ -89,9 +89,9 @@ public class CollectionStringifierTest extends AbstractStringifierTest {
     CollectionStringifier cs1 = new CollectionStringifier(ds);
     CollectionStringifier cs2 = new CollectionStringifier(ds, lc);
 
-    testStringifier(cs1.toString(getCollectionI(8)), cs1.toString(getCollectionS(8)), ds.toString(getCollectionS(8)));
-    testStringifier(cs2.toString(getCollectionI(8)), cs1.toString(getCollectionS(8)), cs2.toString(getCollectionS(7)));
-    testStringifier(cs2.toString(getCollectionSa(8)), cs1.toString(getCollectionSa(8)), cs2.toString(getCollectionSb(8)));
+    assertStringifier(cs1.toString(getCollectionI(8)), cs1.toString(getCollectionS(8)), ds.toString(getCollectionS(8)));
+    assertStringifier(cs2.toString(getCollectionI(8)), cs1.toString(getCollectionS(8)), cs2.toString(getCollectionS(7)));
+    assertStringifier(cs2.toString(getCollectionSa(8)), cs1.toString(getCollectionSa(8)), cs2.toString(getCollectionSb(8)));
 
   }
 

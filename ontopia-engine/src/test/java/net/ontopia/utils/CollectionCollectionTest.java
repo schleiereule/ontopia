@@ -36,10 +36,6 @@ public class CollectionCollectionTest extends AbstractCollectionTest {
     return new TestSuite(CollectionCollectionTest.class);
   }
 
-  public void testCollection(Collection coll, Collection identical, Collection smaller) {
-    super.testCollection(coll, identical, smaller);
-  }
-
   protected Collection getCollections(int numcol, int size) {
     Collection list = (Collection) new ArrayList();
     for (int j = 0; j < numcol; j++) {
@@ -58,8 +54,8 @@ public class CollectionCollectionTest extends AbstractCollectionTest {
 
   public void testCollectionCollection() {
     intended_size = 40;
-    testCollection(new CollectionCollection(getCollections(5, 8)), getCollectionList(5, 8), getCollectionList(6, 3));
-    testCollection(new CollectionCollection(getCollections(5, 8)), getCollectionList(5, 8), getCollectionList(2, 7));
+    assertCollection(new CollectionCollection(getCollections(5, 8)), getCollectionList(5, 8), getCollectionList(6, 3));
+    assertCollection(new CollectionCollection(getCollections(5, 8)), getCollectionList(5, 8), getCollectionList(2, 7));
   }
 
   public void testEmpty() {

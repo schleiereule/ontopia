@@ -42,7 +42,7 @@ public class TopicPredicateTest extends AbstractPredicateTest {
     while (it.hasNext())
       addMatch(matches, "TOPIC", it.next());
     
-    verifyQuery(matches, "topic($TOPIC)?");
+    assertQueryMatches(matches, "topic($TOPIC)?");
     closeStore();
   }
 
@@ -52,7 +52,7 @@ public class TopicPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     matches.add(new HashMap());
     
-    verifyQuery(matches, "topic(marriage)?");
+    assertQueryMatches(matches, "topic(marriage)?");
     closeStore();
   }
 
@@ -60,7 +60,7 @@ public class TopicPredicateTest extends AbstractPredicateTest {
     load("jill.xtm");
 
     List matches = new ArrayList(); // should not match anything
-    verifyQuery(matches, OPT_TYPECHECK_OFF +
+    assertQueryMatches(matches, OPT_TYPECHECK_OFF +
                 "topic(jill-ontopia-association)?");
     closeStore();
   }
@@ -69,7 +69,7 @@ public class TopicPredicateTest extends AbstractPredicateTest {
     load("jill.xtm");
 
     List matches = new ArrayList(); // should not match anything
-    verifyQuery(matches, OPT_TYPECHECK_OFF +
+    assertQueryMatches(matches, OPT_TYPECHECK_OFF +
                 "topic($NOTHING), association($NOTHING)?");
     closeStore();
   }
@@ -77,7 +77,7 @@ public class TopicPredicateTest extends AbstractPredicateTest {
   public void testFiltering() throws InvalidQueryException, IOException {
     load("family.ltm");
 
-    findNothing("/* #OPTION: optimizer.reorder = false */ " +
+    assertFindNothing("/* #OPTION: optimizer.reorder = false */ " +
                 "$A = 1, topic($A)?");
   }
 }

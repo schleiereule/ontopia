@@ -44,7 +44,7 @@ public class InPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "HUMAN", getTopicById("sharon"));
     addMatch(matches, "HUMAN", getTopicById("spencer"));
     
-    verifyQuery(matches, IMPORT_EXPERIMENTAL + "instance-of($HUMAN, human), exp:in($HUMAN, dan, sharon, spencer)?");
+    assertQueryMatches(matches, IMPORT_EXPERIMENTAL + "instance-of($HUMAN, human), exp:in($HUMAN, dan, sharon, spencer)?");
     closeStore();
   }
 
@@ -54,7 +54,7 @@ public class InPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "FEMALE", getTopicById("sharon"));
     
-    verifyQuery(matches, IMPORT_EXPERIMENTAL + "instance-of($FEMALE, female), exp:in($FEMALE, dan, sharon, spencer)?");
+    assertQueryMatches(matches, IMPORT_EXPERIMENTAL + "instance-of($FEMALE, female), exp:in($FEMALE, dan, sharon, spencer)?");
     closeStore();
   }
 
@@ -65,7 +65,7 @@ public class InPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "MALE", getTopicById("dan"));
     addMatch(matches, "MALE", getTopicById("spencer"));
     
-    verifyQuery(matches, IMPORT_EXPERIMENTAL + "instance-of($MALE, male), exp:in($MALE, dan, sharon, spencer)?");
+    assertQueryMatches(matches, IMPORT_EXPERIMENTAL + "instance-of($MALE, male), exp:in($MALE, dan, sharon, spencer)?");
     closeStore();
   }
 
@@ -81,7 +81,7 @@ public class InPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "HUMAN", getTopicById("clyde"));
     addMatch(matches, "HUMAN", getTopicById("james"));
     
-    verifyQuery(matches, IMPORT_EXPERIMENTAL + "instance-of($HUMAN, male), not(exp:in($HUMAN, dan, sharon, spencer))?");
+    assertQueryMatches(matches, IMPORT_EXPERIMENTAL + "instance-of($HUMAN, male), not(exp:in($HUMAN, dan, sharon, spencer))?");
     closeStore();
   }
   

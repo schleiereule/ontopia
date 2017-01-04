@@ -36,7 +36,7 @@ public abstract class AbstractStringifierTest extends TestCase {
   protected void tearDown() {
   }
 
-  protected void testStringifier(Object str, Object identical, Object different) {
+  protected void assertStringifier(Object str, Object identical, Object different) {
     assertTrue("stringifier is not equal", str.equals(identical));
     assertTrue("stringifier is equal", !str.equals(different));
   }

@@ -45,7 +45,7 @@ public class ReifiesPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "RR", getTopicById ("jillstm-topic"),
                       "RD", getObjectById("jillstm"));
     
-    verifyQuery(matches, "reifies($RR, $RD)?");
+    assertQueryMatches(matches, "reifies($RR, $RD)?");
     closeStore();
   }
 
@@ -55,7 +55,7 @@ public class ReifiesPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "RD", getObjectById("jill-ontopia-association"));
     
-    verifyQuery(matches, "reifies(jill-ontopia-topic, $RD)?");
+    assertQueryMatches(matches, "reifies(jill-ontopia-topic, $RD)?");
     closeStore();
   }
 
@@ -66,7 +66,7 @@ public class ReifiesPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "RD", getObjectById("jill-ontopia-association"));
     
     Map args = makeArguments("param", getObjectById("jill-ontopia-topic"));
-    verifyQuery(matches, "reifies(%param%, $RD)?", args);
+    assertQueryMatches(matches, "reifies(%param%, $RD)?", args);
     closeStore();
   }
 
@@ -75,7 +75,7 @@ public class ReifiesPredicateTest extends AbstractPredicateTest {
 
     List matches = new ArrayList();
     
-    verifyQuery(matches, "reifies(jill, $RD)?");
+    assertQueryMatches(matches, "reifies(jill, $RD)?");
     closeStore();
   }
 
@@ -85,7 +85,7 @@ public class ReifiesPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "RR", getTopicById("jill-ontopia-topic"));
     
-    verifyQuery(matches, "reifies($RR, jill-ontopia-association)?");
+    assertQueryMatches(matches, "reifies($RR, jill-ontopia-association)?");
     closeStore();
   }
   
@@ -96,7 +96,7 @@ public class ReifiesPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "RR", getTopicById("jill-ontopia-topic"));
     
     Map args = makeArguments("param", getObjectById("jill-ontopia-association"));
-    verifyQuery(matches, "reifies($RR, %param%)?", args);
+    assertQueryMatches(matches, "reifies($RR, %param%)?", args);
     closeStore();
   }
 
@@ -105,7 +105,7 @@ public class ReifiesPredicateTest extends AbstractPredicateTest {
 
     List matches = new ArrayList();
     
-    verifyQuery(matches, "reifies($RR, jills-name)?");
+    assertQueryMatches(matches, "reifies($RR, jills-name)?");
     closeStore();
   }
   
@@ -115,7 +115,7 @@ public class ReifiesPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     matches.add(new HashMap());
     
-    verifyQuery(matches, "reifies(jill-ontopia-topic, jill-ontopia-association)?");
+    assertQueryMatches(matches, "reifies(jill-ontopia-topic, jill-ontopia-association)?");
     closeStore();
   }
   
@@ -123,7 +123,7 @@ public class ReifiesPredicateTest extends AbstractPredicateTest {
     load("jill.xtm");
 
     List matches = new ArrayList();
-    verifyQuery(matches, "reifies(jill-ontopia-topic, jills-contract)?");
+    assertQueryMatches(matches, "reifies(jill-ontopia-topic, jills-contract)?");
     closeStore();
   }
   

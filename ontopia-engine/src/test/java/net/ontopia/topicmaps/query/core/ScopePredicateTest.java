@@ -62,7 +62,7 @@ public class ScopePredicateTest extends AbstractPredicateTest {
         addScopesOf(matches, ((TopicNameIF) it2.next()).getVariants());
     }
                 
-    verifyQuery(matches, "scope($SCOPED, $THEME)?");
+    assertQueryMatches(matches, "scope($SCOPED, $THEME)?");
   }
 
   public void testCrossJoin() throws InvalidQueryException, IOException {
@@ -70,7 +70,7 @@ public class ScopePredicateTest extends AbstractPredicateTest {
 
     List matches = new ArrayList();
     
-    verifyQuery(matches, OPT_TYPECHECK_OFF +
+    assertQueryMatches(matches, OPT_TYPECHECK_OFF +
                 "association-role($ASSOC, $ROLE), scope($ROLE, $THEME)?");
   } 
   
@@ -94,7 +94,7 @@ public class ScopePredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches);
  
-    verifyQuery(matches, "scope(@" + thing.getObjectId() + ", @" + theme.getObjectId() + ")?");
+    assertQueryMatches(matches, "scope(@" + thing.getObjectId() + ", @" + theme.getObjectId() + ")?");
   }
   
   public void testTopicNameBothUnbound() throws InvalidQueryException, IOException {
@@ -108,7 +108,7 @@ public class ScopePredicateTest extends AbstractPredicateTest {
     addMatch(matches, "THING", thing, "THEME", theme);
 
     // NOTE: using topic-name predicate here to avoid type cross product
-    verifyQuery(matches, "topic-name(@" + topic.getObjectId() + ", $THING), scope($THING, $THEME)?");
+    assertQueryMatches(matches, "topic-name(@" + topic.getObjectId() + ", $THING), scope($THING, $THEME)?");
   }
   
   public void testTopicNameBound() throws InvalidQueryException, IOException {
@@ -121,7 +121,7 @@ public class ScopePredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "THEME", theme);
  
-    verifyQuery(matches, "scope(@" + thing.getObjectId() + ", $THEME)?");
+    assertQueryMatches(matches, "scope(@" + thing.getObjectId() + ", $THEME)?");
   }
   
   public void testTopicNameUnbound() throws InvalidQueryException, IOException {
@@ -135,7 +135,7 @@ public class ScopePredicateTest extends AbstractPredicateTest {
     addMatch(matches, "THING", thing);
  
     // NOTE: using topic-name predicate here to avoid type cross product
-    verifyQuery(matches, "topic-name(@" + topic.getObjectId() + ", $THING), scope($THING, @" + theme.getObjectId() + ")?");
+    assertQueryMatches(matches, "topic-name(@" + topic.getObjectId() + ", $THING), scope($THING, @" + theme.getObjectId() + ")?");
   }
   
   public void testSpecificTopicNameNoScope() throws InvalidQueryException, IOException {
@@ -145,7 +145,7 @@ public class ScopePredicateTest extends AbstractPredicateTest {
     TopicNameIF bn = builder.makeTopicName(topic, "name");
 
     List matches = new ArrayList();
-    verifyQuery(matches, "scope(@" + bn.getObjectId() + ", $THEME)?");
+    assertQueryMatches(matches, "scope(@" + bn.getObjectId() + ", $THEME)?");
   }
   
 }

@@ -40,7 +40,7 @@ public class RDBMSPatternSingleTopicMapSourceTest
 
   public void testSource() {
     // run abstract topic map source tests
-    doAbstractTopicMapSourceTests(makeSource());
+    assertCompliesToAbstractTopicMapSource(makeSource());
   }
 
   public void testRefresh() throws IOException {

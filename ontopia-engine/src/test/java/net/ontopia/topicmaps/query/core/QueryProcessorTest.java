@@ -67,7 +67,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
   
   public void testEmptyDirectInstanceOfAB() throws InvalidQueryException {
     makeEmpty();
-    findNothing("direct-instance-of($A, $B)?");
+    assertFindNothing("direct-instance-of($A, $B)?");
   }
 
   /// instance-of topic map
@@ -81,7 +81,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("topic3"), "B", getTopicById("type2"));
     addMatch(matches, "A", getTopicById("topic4"), "B", getTopicById("type2"));
     
-    verifyQuery(matches, "direct-instance-of($A, $B)?");
+    assertQueryMatches(matches, "direct-instance-of($A, $B)?");
   }
   
   public void testDirectInstanceOfaB() throws InvalidQueryException, IOException {
@@ -90,7 +90,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "B", getTopicById("type1"));
     
-    verifyQuery(matches, "direct-instance-of(topic1, $B)?");
+    assertQueryMatches(matches, "direct-instance-of(topic1, $B)?");
   }
 
   public void testDirectInstanceOfAb() throws InvalidQueryException, IOException {
@@ -100,7 +100,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("topic1"));
     addMatch(matches, "A", getTopicById("topic2"));
     
-    verifyQuery(matches, "direct-instance-of($A, type1)?");
+    assertQueryMatches(matches, "direct-instance-of($A, type1)?");
   }
 
   public void testDirectInstanceOfab() throws InvalidQueryException, IOException {
@@ -109,12 +109,12 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     matches.add(new HashMap());
     
-    verifyQuery(matches, "direct-instance-of(topic1, type1)?");
+    assertQueryMatches(matches, "direct-instance-of(topic1, type1)?");
   }
 
   public void testDirectInstanceOfWrong() throws InvalidQueryException, IOException {
     load("instance-of.ltm");
-    findNothing("direct-instance-of(topic1, type2)?");
+    assertFindNothing("direct-instance-of(topic1, type2)?");
   }
 
   public void testSubjectIndicatorRef() throws InvalidQueryException, IOException {
@@ -124,7 +124,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("topic1"));
     addMatch(matches, "A", getTopicById("topic2"));
     
-    verifyQuery(matches, "direct-instance-of($A, i\"http://psi.ontopia.net/test/#1\")?");
+    assertQueryMatches(matches, "direct-instance-of($A, i\"http://psi.ontopia.net/test/#1\")?");
   }
 
   public void testSubjectAddressRef() throws InvalidQueryException, IOException {
@@ -134,7 +134,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("topic3"));
     addMatch(matches, "A", getTopicById("topic4"));
     
-    verifyQuery(matches, "direct-instance-of($A, a\"http://psi.ontopia.net/test/#2\")?");
+    assertQueryMatches(matches, "direct-instance-of($A, a\"http://psi.ontopia.net/test/#2\")?");
   }  
 
   public void testSimpleCount() throws InvalidQueryException, IOException{
@@ -146,7 +146,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "CLASS", getTopicById("type2"),
                       "INST", new Integer(2));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $CLASS, count($INST) from " +
                 "instance-of($INST, $CLASS)?");
   }
@@ -158,7 +158,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "INST", new Integer(0));
     
     // there should be no instance of topic4
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select count($INST) from " +
                 "instance-of($INST, topic4)?");
   }
@@ -172,7 +172,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
              "TYPE", new Integer(0));
     
     // there should be no types for type1
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $TOPIC, count($TYPE) from " +
                 "$TOPIC = type1, " +
                 "{ instance-of($TOPIC, $TYPE) }?");
@@ -189,7 +189,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("topic3"), "B", getTopicById("type2"));
     addMatch(matches, "A", getTopicById("topic4"), "B", getTopicById("type2"));
     
-    verifyQuery(matches, "direct-instance-of($A, $B)?");
+    assertQueryMatches(matches, "direct-instance-of($A, $B)?");
   }
   
   public void testDirectInstanceOfaBSub() throws InvalidQueryException, IOException {
@@ -198,7 +198,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "B", getTopicById("type1"));
     
-    verifyQuery(matches, "direct-instance-of(topic1, $B)?");
+    assertQueryMatches(matches, "direct-instance-of(topic1, $B)?");
   }
 
   public void testDirectInstanceOfAbSub() throws InvalidQueryException, IOException {
@@ -208,7 +208,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("topic1"));
     addMatch(matches, "A", getTopicById("topic2"));
     
-    verifyQuery(matches, "direct-instance-of($A, type1)?");
+    assertQueryMatches(matches, "direct-instance-of($A, type1)?");
   }
 
   public void testDirectInstanceOfabSub() throws InvalidQueryException, IOException {
@@ -217,12 +217,12 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     matches.add(new HashMap());
     
-    verifyQuery(matches, "direct-instance-of(topic1, type1)?");
+    assertQueryMatches(matches, "direct-instance-of(topic1, type1)?");
   }
 
   public void testDirectInstanceOfWrongSub() throws InvalidQueryException, IOException {
     load("subclasses.ltm");
-    findNothing("direct-instance-of(topic1, type2)?");
+    assertFindNothing("direct-instance-of(topic1, type2)?");
   }
   
   public void testSimpleSelect() throws InvalidQueryException, IOException{
@@ -236,7 +236,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "F", getTopicById("magnus"));
     addMatch(matches, "F", getTopicById("unknown2"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $F from " +
                 "parenthood($M : mother, $F : father, $C : child)?");
   }
@@ -252,7 +252,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "F", getTopicById("magnus"), "M", getTopicById("bertha"));
     addMatch(matches, "F", getTopicById("unknown2"), "M", getTopicById("unknown1"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $F, $M from " +
                 "parenthood($M : mother, $F : father, $C : child)?");
   }
@@ -268,7 +268,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "GCC", getTopicById("lmg"));
     addMatch(matches, "GCC", getTopicById("silje"));
     
-    verifyQuery(matches, "grandchild(edvin, kjellaug, $GCC)?",
+    assertQueryMatches(matches, "grandchild(edvin, kjellaug, $GCC)?",
                 "grandchild($GF, $GM, $GC) :- " +
                 "parenthood($GF : father, $GM : mother, $C : child)," +
                 "parenthood($C : father, $M : mother, $GC : child).");
@@ -285,7 +285,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "GC", getTopicById("lmg"));
     addMatch(matches, "GC", getTopicById("silje"));
     
-    verifyQuery(matches, "grandchild(edvin, kjellaug, $GC)?",
+    assertQueryMatches(matches, "grandchild(edvin, kjellaug, $GC)?",
                 "grandchild($GF, $GM, $GC) :- " +
                 "parenthood($GF : father, $GM : mother, $C : child)," +
                 "parenthood($C : father, $M : mother, $GC : child).");
@@ -297,7 +297,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     matches.add(new HashMap());
     
-    verifyQuery(matches, "grandchild(edvin, kjellaug, trygve)?",
+    assertQueryMatches(matches, "grandchild(edvin, kjellaug, trygve)?",
                 "grandchild($GF, $GM, $GC) :- " +
                 "parenthood($GF : father, $GM : mother, $C : child)," +
                 "parenthood($C : father, $M : mother, $GC : child).");
@@ -320,7 +320,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "GC", getTopicById("silje"),
              "C", getTopicById("kfg"));
     
-    verifyQuery(matches, "is-father(edvin, $C), is-father($C, $GC)?",
+    assertQueryMatches(matches, "is-father(edvin, $C), is-father($C, $GC)?",
                 "is-father($F, $C) :- " +
                 "parenthood($F : father, $M : mother, $C : child). ");
   }
@@ -342,7 +342,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "GC", getTopicById("silje"),
              "CHILD", getTopicById("kfg"));
     
-    verifyQuery(matches, "is-father(edvin, $CHILD), is-father($CHILD, $GC)?",
+    assertQueryMatches(matches, "is-father(edvin, $CHILD), is-father($CHILD, $GC)?",
                 "is-father($F, $C) :- " +
                 "parenthood($F : father, $M : mother, $C : child). ");
   }
@@ -358,7 +358,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "C", getTopicById("lmg"));
     addMatch(matches, "C", getTopicById("silje"));
     
-    verifyQuery(matches, "grandfather(edvin, $C)?",
+    assertQueryMatches(matches, "grandfather(edvin, $C)?",
                 "is-father($F, $C) :- " +
                 "parenthood($F : father, $M : mother, $C : child). " +
                 "grandfather($GF, $GC) :- " +
@@ -377,7 +377,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "GC", getTopicById("lmg"));
     addMatch(matches, "GC", getTopicById("silje"));
     
-    verifyQuery(matches, "grandfather(edvin, $GC)?",
+    assertQueryMatches(matches, "grandfather(edvin, $GC)?",
                 "is-father($F, $C) :- " +
                 "parenthood($F : father, $M : mother, $C : child). " +
                 "grandfather($GF, $GC) :- " +
@@ -398,7 +398,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "GCC", getTopicById("lmg"));
     addMatch(matches, "GCC", getTopicById("silje"));
     
-    verifyQuery(matches, "edvins-grandchild($GCC)?",
+    assertQueryMatches(matches, "edvins-grandchild($GCC)?",
                 "edvins-grandchild($GC) :- " +
                 "parenthood(edvin : father, $GM : mother, $C : child)," +
                 "parenthood($C : father, $M : mother, $GC : child).");
@@ -418,7 +418,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "GCC", getTopicById("lmg"));
     addMatch(matches, "GCC", getTopicById("silje"));
     
-    verifyQuery(matches, "edvins-grandchild($GCC)?",
+    assertQueryMatches(matches, "edvins-grandchild($GCC)?",
                 "father-of($F, $C) :- " +
                 "parenthood($F : father, $M : mother, $C : child)." +
                 "edvins-grandchild($GC) :- " +
@@ -434,13 +434,13 @@ public class QueryProcessorTest extends AbstractQueryTest {
     matches.add(new HashMap());
 
     // this should be true
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "father-of($F, $C) :- " +
                 "  parenthood($F : father, $M : mother, $C : child). " +
                 "father-of(kfg, lmg)?");
 
     // and this should be false
-    findNothing("father-of($F, $C) :- " +
+    assertFindNothing("father-of($F, $C) :- " +
                 "  parenthood($F : father, $M : mother, $C : child). " +
                 "father-of(lmg, kfg)?");
   }
@@ -452,7 +452,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "P", getTopicById("petter"));
     addMatch(matches, "P", getTopicById("may"));
     
-    verifyQuery(matches, "select $P from " +
+    assertQueryMatches(matches, "select $P from " +
                 " { parenthood($P : father, $M : mother, trygve : child) | " +
                 "   parenthood($F : father, $P : mother, trygve : child) }? ");
   }
@@ -463,7 +463,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "P", getTopicById("petter"));
     
-    verifyQuery(matches, "select $P from " +
+    assertQueryMatches(matches, "select $P from " +
                 " { parenthood($P : father, $M : mother, trygve : child) | " +
                 "   trygve /= trygve }? ");
   }
@@ -475,7 +475,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "P", getTopicById("petter"));
     addMatch(matches, "P", getTopicById("may"));
     
-    verifyQuery(matches, "parent($P, trygve)?",
+    assertQueryMatches(matches, "parent($P, trygve)?",
                 "parent($P, $C) :- " +
                 "  { parenthood($P : father, $M : mother, $C : child) | " +
                 "    parenthood($F : father, $P : mother, $C : child) }. ");
@@ -498,7 +498,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "P", getTopicById("unknown1"), "C", new Integer(1));
     addMatch(matches, "P", getTopicById("unknown2"), "C", new Integer(1));
     
-    verifyQuery(matches, "select $P, count($C) from parent($P, $C)?",
+    assertQueryMatches(matches, "select $P, count($C) from parent($P, $C)?",
                 "parent($P, $C) :- " +
                 "  { parenthood($P : father, $M : mother, $C : child) | " +
                 "    parenthood($F : father, $P : mother, $C : child) }. ");
@@ -513,7 +513,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "AA", getTopicById("may"));
     addMatch(matches, "AA", getTopicById("petter"));
     
-    verifyQuery(matches, "etterkommer($AA, trygve)?",
+    assertQueryMatches(matches, "etterkommer($AA, trygve)?",
                 "etterkommer($A, $D) :- " +
                 "  { parenthood($A : father, $M : mother, $C : child), " +
                 "    etterkommer($C, $D) | " +
@@ -532,7 +532,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "AA", getTopicById("may"));
     addMatch(matches, "AA", getTopicById("petter"));
     
-    verifyQuery(matches, "etterkommer($AA, trygve)?",
+    assertQueryMatches(matches, "etterkommer($AA, trygve)?",
                 "parent($P, $C) :- " +
                 "  { parenthood($P : father, $M : mother, $C : child) | " +
                 "    parenthood($F : father, $P : mother, $C : child) }. " +
@@ -551,7 +551,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "AA", getTopicById("may"));
     addMatch(matches, "AA", getTopicById("petter"));
     
-    verifyQuery(matches, HIERARCHY_WALKER_ON + "etterkommer($AA, trygve)?",
+    assertQueryMatches(matches, HIERARCHY_WALKER_ON + "etterkommer($AA, trygve)?",
                 "parent($C, $P) :- " +
                 "  { parenthood($P : father, $M : mother, $C : child) | " +
                 "    parenthood($F : father, $P : mother, $C : child) }. " +
@@ -570,7 +570,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "AA", getTopicById("may"));
     addMatch(matches, "AA", getTopicById("petter"));
     
-    verifyQuery(matches, HIERARCHY_WALKER_ON + "etterkommer($AA, trygve, tm)?",
+    assertQueryMatches(matches, HIERARCHY_WALKER_ON + "etterkommer($AA, trygve, tm)?",
                 "parent($C, $P, $UNUSED) :- " +
                 "  { parenthood($P : father, $M : mother, $C : child) | " +
                 "    parenthood($F : father, $P : mother, $C : child) }, " +
@@ -588,7 +588,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     matches.add(new HashMap());
     
-    verifyQuery(matches, HIERARCHY_WALKER_ON + "etterkommer(edvin, trygve)?",
+    assertQueryMatches(matches, HIERARCHY_WALKER_ON + "etterkommer(edvin, trygve)?",
                 "parent($P, $C) :- " +
                 "  { parenthood($P : father, $M : mother, $C : child) | " +
                 "    parenthood($F : father, $P : mother, $C : child) }. " +
@@ -601,7 +601,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
   public void testRecursiveMyths() throws InvalidQueryException, IOException {
     load("family.ltm");
 
-    findNothing(HIERARCHY_WALKER_ON + 
+    assertFindNothing(HIERARCHY_WALKER_ON + 
                 "parent($P, $C) :- " +
                 "  { parenthood($P : father, $M : mother, $C : child) | " +
                 "    parenthood($F : father, $P : mother, $C : child) }. " +
@@ -622,7 +622,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "COUNTRY", getTopicById("spain"), "OPERA", new Integer(5));
 
     // deliberately *not* using hierarchy walker, as that would obscure problem
-    verifyQuery(matches, HIERARCHY_WALKER_OFF + 
+    assertQueryMatches(matches, HIERARCHY_WALKER_OFF + 
                 "ext-located-in($CONTAINEE, $CONTAINER) :- " +
                 "{ " +
                 " located-in($CONTAINEE : containee, $CONTAINER : container) | " +
@@ -645,7 +645,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "C", getTopicById("lmg"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                "select $C from " +
                "parenthood($F : father, $M : mother, $C : child), " +
                "not($C /= lmg)?");
@@ -665,7 +665,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "C", getTopicById("lms"));
     addMatch(matches, "C", getTopicById("gerd"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                "select $C from " +
                "parenthood($F : father, $M : mother, $C : child), " +
                "not(instance-of($C, father))?");
@@ -683,7 +683,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "C", getTopicById("tine"));
     addMatch(matches, "C", getTopicById("lms"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                "select $C from " +
                "parenthood($F : father, $M : mother, $C : child), " +
                "not({ parenthood($C : father, $MM : mother, $CC : child) | "+
@@ -697,7 +697,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "PERSON", getTopicById("bjorg"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "parenthood(lmg : child, $PERSON : mother, kfg : father), " +
                 "{ not(parenthood($PERSON : child, bertha : mother, magnus : father)) | " +
                 "  not(instance-of($PERSON, father)) }?");
@@ -715,7 +715,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
 
     // Note: Mr. Potato Head should not occur in the result.
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                "select $DIED-IN, $PERSON from " +
                 "born-in($PERSON : person, lucca : place), " +
                 "died-in($PERSON : person, $DIED-IN : place), " +
@@ -733,7 +733,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "B", getTopicById("graph-sign"));
     addMatch(matches, "B", getTopicById("visual-sign"));
 
-    verifyQuery(matches, "descendant-of($B, sign-type)?",
+    assertQueryMatches(matches, "descendant-of($B, sign-type)?",
                 "child-of ($A, $B) :- " +
                 "  subclass-of($A : subclass, $B : superclass). " +
                 "descendant-of($A, $B) :- " +
@@ -748,7 +748,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "AUNT", getTopicById("anita"));
     addMatch(matches, "AUNT", getTopicById("carolyn"));
     
-    verifyQuery(matches, "aunt-of($AUNT, lana)?",
+    assertQueryMatches(matches, "aunt-of($AUNT, lana)?",
                 "parent-of($A, $B) :- " +
                 "    { parenthood($B : child, $A : mother, $F : father) | " +
                 "      parenthood($B : child, $M : mother, $A : father) }. " +
@@ -768,7 +768,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "NEPHEW", getTopicById("philip"));
     
-    verifyQuery(matches, "aunt-of(lana, $NEPHEW)?",
+    assertQueryMatches(matches, "aunt-of(lana, $NEPHEW)?",
                 "parent-of($A, $B) :- " +
                 "    { parenthood($B : child, $A : mother, $F : father) | " +
                 "      parenthood($B : child, $M : mother, $A : father) }. " +
@@ -794,7 +794,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "REIFIER", getTopicById("jill-ontopia-topic"),
              "REIFIED", getObjectById("jill-ontopia-association"));
     
-    verifyQuery(matches, "reifies($REIFIER, $REIFIED) order by $REIFIED?");
+    assertQueryMatches(matches, "reifies($REIFIER, $REIFIED) order by $REIFIED?");
   }
 
   public void testOrderingOfNullTopics() throws InvalidQueryException, IOException {
@@ -814,7 +814,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "F", getTopicById("kfg"),
              "GF", getObjectById("edvin"));
 
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "select $F, $GF from " + // simplify results
                      "instance-of($F, father), " +
                      "{ parenthood($F : child, $GM : mother, $GF : father) } " +
@@ -836,7 +836,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "T", getTopicById("horse"),
              "D", "http://www.hest.no/");
 
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "instance-of($T, bbtopic), " +
                      "{ nettressurs($T, $D) } " +
                      "order by $D, $T?");
@@ -857,7 +857,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "REIFIER", getTopicById("contract"),
              "REIFIED", null);
 
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "topic($REIFIER), " +
                      "{ reifies($REIFIER, $REIFIED) } " +
                      "order by $REIFIED, $REIFIER " +
@@ -879,7 +879,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "F", getTopicById("petter"), "C", new Integer(3));
     addMatch(matches, "F", getTopicById("kfg"), "C", new Integer(3));
 
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "select $F, count($C) from topic($F), " +
                      "{ instance-of($F, father) | topic-name($F, $TN), value($TN, \"Lars Marius Garshol\") }, " +
                      "{ parenthood($F : father, $C : child) } " +
@@ -895,7 +895,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "B", getTopicById("type1"));
 
     Map args = makeArguments("param", "topic1");
-    verifyQuery(matches, "instance-of(%param%, $B)?", args);
+    assertQueryMatches(matches, "instance-of(%param%, $B)?", args);
   }
   
   public void testDirectInstanceOfaBParameter() throws InvalidQueryException, IOException {
@@ -905,7 +905,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "B", getTopicById("type1"));
 
     Map args = makeArguments("param", "topic1");
-    verifyQuery(matches, "direct-instance-of(%param%, $B)?", args);
+    assertQueryMatches(matches, "direct-instance-of(%param%, $B)?", args);
   }
 
   public void testInstanceOfAbParameter() throws InvalidQueryException, IOException {
@@ -916,7 +916,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("topic2"));
     
     Map args = makeArguments("param", "type1");
-    verifyQuery(matches, "instance-of($A, %param%)?", args);
+    assertQueryMatches(matches, "instance-of($A, %param%)?", args);
   }
   
   public void testDirectInstanceOfAbParameter() throws InvalidQueryException, IOException {
@@ -927,7 +927,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("topic2"));
     
     Map args = makeArguments("param", "type1");
-    verifyQuery(matches, "direct-instance-of($A, %param%)?", args);
+    assertQueryMatches(matches, "direct-instance-of($A, %param%)?", args);
   }
 
   public void testChildrenOfAParameter() throws InvalidQueryException,IOException{
@@ -940,7 +940,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
 
     Map args = makeArguments("param", "bjorg");
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                "select $C from " +
                "parenthood(%param% : mother, $C : child)?", args);
   }
@@ -952,7 +952,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
 
     Map args = makeArguments("param", "kfg");
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "related($A, $ASSOC, $B) :- " +
                 "  role-player($ROLE1, $A), association-role($ASSOC, $ROLE1), " +
                 "  association-role($ASSOC, $ROLE2), $ROLE1 /= $ROLE2, " +
@@ -964,7 +964,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
   public void testUnspecifiedParam() throws InvalidQueryException, IOException {
     load("family.ltm");
 
-    getParseError("topicmap(%NOSUCHPARAMETER%)?");
+    assertGetParseError("topicmap(%NOSUCHPARAMETER%)?");
   }
   
   /// other tests
@@ -1011,7 +1011,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("anita"));
     addMatch(matches, "A", getTopicById("bruce"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                "instance-of($A, human) order by $A limit 4?");
   }
 
@@ -1022,7 +1022,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("sharon"));
     addMatch(matches, "A", getTopicById("spencer"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                "instance-of($A, human) order by $A offset 15?");
   }
 
@@ -1036,7 +1036,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("carolyn"));
     addMatch(matches, "A", getTopicById("clyde"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                "instance-of($A, human) order by $A limit 5 offset 1?");
   }
 
@@ -1046,7 +1046,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "A", getTopicById("clyde"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                "instance-of($A, human) order by $A limit 1 offset 5?");
   }
 
@@ -1059,14 +1059,14 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("topic3"), "B", getTopicById("type2"));
     addMatch(matches, "A", getTopicById("topic4"), "B", getTopicById("type2"));
     
-    verifyQuery(matches, "instance-of($A, $B) offset 0?");
+    assertQueryMatches(matches, "instance-of($A, $B) offset 0?");
   }
 
   public void testLimitZero() throws InvalidQueryException, IOException {
     load("instance-of.ltm");
 
     List matches = new ArrayList();  
-    verifyQuery(matches, "instance-of($A, $B) limit 0?");
+    assertQueryMatches(matches, "instance-of($A, $B) limit 0?");
   }
 
   /// count and duplicate removal tests
@@ -1083,7 +1083,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "T2", getTopicById("alcohol-abuse"));
     addMatch(matches, "T2", getTopicById("addiction"));
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $T2 from synonym2(drug-abuse, $T2)?",
                 "synonym($A,$B) :- { use-for($A: used-term, $B: unused-term) " +
                 " | use-for($B: used-term, $A: unused-term) }. " +
@@ -1098,7 +1098,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "T2", new Integer(7));
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select count($T2) from synonym2(drug-abuse, $T2)?",
                 "synonym($A,$B) :- { use-for($A: used-term, $B: unused-term) " +
                 " | use-for($B: used-term, $A: unused-term) }. " +
@@ -1119,7 +1119,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "T1", getTopicById("alcohol-abuse"), "T2", new Integer(4));
     addMatch(matches, "T1", getTopicById("addiction"), "T2", new Integer(4));
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $T1, count($T2) from synonym2($T1, $T2)?",
                 "synonym($A,$B) :- { use-for($A: used-term, $B: unused-term) " +
                 " | use-for($B: used-term, $A: unused-term) }. " +
@@ -1143,7 +1143,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "P", getTopicById("anita"), "F", getTopicById("clyde"));
     addMatch(matches, "P", getTopicById("carolyn"), "F", getTopicById("clyde"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "  instance-of($P, female), " +
                 "  { parenthood($P : child, $F : father) }?");
   }
@@ -1151,7 +1151,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
   public void testOptionalClauseEmpty() throws InvalidQueryException, IOException {
     load("family2.ltm");
 
-    getParseError("  instance-of($P, female), { }?");
+    assertGetParseError("  instance-of($P, female), { }?");
   }
 
   public void testOptionalClauseOrdering() throws InvalidQueryException, IOException {
@@ -1167,7 +1167,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
                "PERSON", result.getValue("PERSON"));
     result.close();
 
-    verifyQuery(matches, "date-of-birth($PERSON, $DATE), " +
+    assertQueryMatches(matches, "date-of-birth($PERSON, $DATE), " +
                 "{ premiere-date($OPERA, $DATE) }?");
   }
   
@@ -1186,7 +1186,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     
     String url = URIUtils.toURL(TestFileUtils.getTransferredTestInputFile("query", "grandchild.tl")).toString();
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "import \"" + url + "\" as fam " +
                 "fam:grandchild(edvin, kjellaug, $GCC)?");
   }
@@ -1202,7 +1202,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "GCC", getTopicById("lmg"));
     addMatch(matches, "GCC", getTopicById("silje"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "import \"grandchild.tl\" as fam " +
                 "fam:grandchild(edvin, kjellaug, $GCC)?");
   }
@@ -1210,7 +1210,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
   public void testImportModuleBang() throws InvalidQueryException, IOException {
     makeEmpty(false);
 
-    getParseError("import \"empty.tl\" as fam " +
+    assertGetParseError("import \"empty.tl\" as fam " +
                 "instance-of($A, $B)?");
   }
 
@@ -1226,7 +1226,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "CLASS", getTopicById("type2"),
                       "INST", new Integer(2));
     
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "select $CLASS, count($INST) from " +
                      "instance-of($INST, $CLASS)" +
                      "order by $INST desc?");
@@ -1241,7 +1241,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "CLASS", getTopicById("type1"),
                       "INST", new Integer(4));
     
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "select $CLASS, count($INST) from " +
                      "instance-of($INST, $CLASS)" +
                      "order by $INST asc?");
@@ -1260,7 +1260,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "TOPIC", getTopicById("topic4"),
                       "DESC", "topic4");
     
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "description($TOPIC, $DESC)" +
                      "order by $DESC asc?");
   }  
@@ -1276,7 +1276,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "FATHER", getTopicById("edvin"));
     addMatch(matches, "FATHER", getTopicById("asle"));
     
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "instance-of($FATHER, father)" +
                      "order by $FATHER?");
   }
@@ -1291,7 +1291,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "T", getTopicById("t4"));
     addMatch(matches, "T", getTopicBySI("http://psi.topicmaps.org/iso13250/model/topic-name"));
     
-    verifyQueryOrder(matches, "topic($T) order by $T?");
+    assertQueryOrder(matches, "topic($T) order by $T?");
   }
   
   public void testSortSortName2() throws InvalidQueryException, IOException {
@@ -1305,7 +1305,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "T", getTopicById("t4"));
     addMatch(matches, "T", getTopicBySI("http://psi.topicmaps.org/iso13250/model/topic-name"));
     
-    verifyQueryOrder(matches, "topic($T) order by $T?");
+    assertQueryOrder(matches, "topic($T) order by $T?");
   }
 
   public void testSortSortName3() throws InvalidQueryException, IOException {
@@ -1319,7 +1319,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "T", getTopicById("t4"));
     addMatch(matches, "T", getTopicBySI("http://psi.topicmaps.org/iso13250/model/topic-name"));
     
-    verifyQueryOrder(matches, "topic($T) order by $T?");
+    assertQueryOrder(matches, "topic($T) order by $T?");
   }
 
   public void testSortSortName4() throws InvalidQueryException, IOException {
@@ -1334,7 +1334,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "T", getTopicById("scope"));
     addMatch(matches, "T", getTopicBySI("http://psi.topicmaps.org/iso13250/model/topic-name"));
     
-    verifyQueryOrder(matches, "topic($T) order by $T?");
+    assertQueryOrder(matches, "topic($T) order by $T?");
   }
 
   public void testSortTypedNames() throws InvalidQueryException, IOException {
@@ -1348,7 +1348,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "T", getTopicById("mozart"));
     addMatch(matches, "T", getTopicById("rachmaninov"));
     
-    verifyQueryOrder(matches, "instance-of($T, composer) order by $T?");
+    assertQueryOrder(matches, "instance-of($T, composer) order by $T?");
   }
   
   /// type-related problems
@@ -1356,7 +1356,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
   public void testMixingStringsAndObjects() throws InvalidQueryException, IOException {
     load("jill.xtm");
     
-    getParseError("{ topicmap($A) | resource(jills-contract, $A) }?");
+    assertGetParseError("{ topicmap($A) | resource(jills-contract, $A) }?");
   }
 
   /// bugs
@@ -1402,7 +1402,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     //!             "    premiere($OPERA : opera, $THEATRE : place), "+
     //!             "    located-in($THEATRE : containee, $CITY : container)} " +
     //!             "order by $OPERA desc?");
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $CITY, count($OPERA) from " +
                 "  instance-of($CITY, city), instance-of($OPERA, opera), " +
                 "  { premiere($OPERA : opera, $CITY : place) | " +
@@ -1425,7 +1425,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
   public void testFailurePredicate() throws InvalidQueryException, IOException {
     // motivated by bug #903
     load("family.ltm");
-    findNothing("trygve($T, $V) order by $T?");
+    assertFindNothing("trygve($T, $V) order by $T?");
   }
 
   public void testRuleTypeInferencing() throws InvalidQueryException, IOException {
@@ -1440,7 +1440,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "C", getTopicById("julie"));
     addMatch(matches, "C", getTopicById("astri"));
 
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "parent($M, $F, $C) :- " +
                      "  parenthood($M : mother, $F : father, $C : child). " +
                      
@@ -1457,7 +1457,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     while (it.hasNext())
       addMatch(matches, "A", it.next());
 
-    verifyQuery(matches, OPT_TYPECHECK_OFF +
+    assertQueryMatches(matches, OPT_TYPECHECK_OFF +
                 "topic($A), { association($A) }?");
   }
 
@@ -1470,7 +1470,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     while (it.hasNext())
       addMatch(matches, "A", it.next(), "B", null);
 
-    verifyQuery(matches, OPT_TYPECHECK_OFF +
+    assertQueryMatches(matches, OPT_TYPECHECK_OFF +
                 "{ topic-name($B, $A) }, topic($A)?");    
   }
 
@@ -1490,7 +1490,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
         addMatch(matches, "A", topic, "C", obj, "B", null);
     }
 
-    verifyQuery(matches, OPT_TYPECHECK_OFF +
+    assertQueryMatches(matches, OPT_TYPECHECK_OFF +
                 "{ topic-name($B, $A), topicmap($C) }, topic($A), reifies($A, $C)?");
   }
   
@@ -1503,7 +1503,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     while (it.hasNext())
       addMatch(matches, "A", it.next(), "B", null);
 
-    verifyQuery(matches, OPT_TYPECHECK_OFF +
+    assertQueryMatches(matches, OPT_TYPECHECK_OFF +
                 "not(topic-name($B, $A)), topic($A)?");
   }
 
@@ -1514,7 +1514,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "F", getTopicById("kfg"));
     
-    verifyQuery(matches, "{ parenthood($F : father, lmg : child) | " +
+    assertQueryMatches(matches, "{ parenthood($F : father, lmg : child) | " +
                 "  child($F : father, kjellaug : mother) }?");
 
   }
@@ -1527,7 +1527,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "F", getTopicById("kfg"), "M", null);
     addMatch(matches, "F", null, "M", null);
     
-    verifyQuery(matches, "{ parenthood($F : father, lmg : child) | " +
+    assertQueryMatches(matches, "{ parenthood($F : father, lmg : child) | " +
                 "  not(child($F : father, $M : mother)) }?");
 
   }
@@ -1542,7 +1542,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("peter"));
     addMatch(matches, "A", getTopicById("eileen"));
     
-    verifyQuery(matches, "{instance-of($A, male) | instance-of($A, female)}?");
+    assertQueryMatches(matches, "{instance-of($A, male) | instance-of($A, female)}?");
 
   }
 
@@ -1558,7 +1558,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
       addMatch(matches, "N", bn, "SCOPE", null);
     }
     
-    verifyQuery(matches, OPT_TYPECHECK_OFF +
+    assertQueryMatches(matches, OPT_TYPECHECK_OFF +
                 "topic-name(il-tabarro, $N), " +
                 "not(scope($SCOPE, $N))?");
   }
@@ -1573,7 +1573,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "TOPIC", getTopicById("claudio-cesare-nerone"));
     addMatch(matches, "TOPIC", getTopicById("nerone"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "topic-matches($TOPIC, $SEARCH) :- " +
                 "  value-like($X, $SEARCH), " +
                 "  { topic-name($TOPIC, $X) | " +
@@ -1593,7 +1593,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     while (it.hasNext())
       addMatch(matches, "N", it.next());
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "has-name($T, $N) :- topic-name($T, $N) . " +
                 "has-name(lmg, $N)?");
   }
@@ -1601,7 +1601,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
   public void testBug1083b() throws InvalidQueryException, IOException {
     load("family.ltm");
 
-    findNothing("is-father($T) :- instance-of($T, father) . " +
+    assertFindNothing("is-father($T) :- instance-of($T, father) . " +
                 "is-father(lmg)?");
   }
 
@@ -1614,7 +1614,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "A", getTopicById("test-type"));
     addMatch(matches, "A", getTopicBySI("http://psi.topicmaps.org/iso13250/model/topic-name"));
     
-    verifyQuery(matches, "topic($A) order by $A?");
+    assertQueryMatches(matches, "topic($A) order by $A?");
   }
 
   public void testBug2019() throws InvalidQueryException, IOException {
@@ -1623,7 +1623,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches);
     
-    verifyQuery(matches, "leipziger($P) :- id6(id5 : id2, $P : id1). leipziger(id4)?");
+    assertQueryMatches(matches, "leipziger($P) :- id6(id5 : id2, $P : id1). leipziger(id4)?");
   }
   
 // FIXME: the problem here is that the behaviour of count() is
@@ -1644,7 +1644,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "TOPIC", getTopicById("lombardo"));
 
-    verifyQuery(matches, "select $TOPIC from " +
+    assertQueryMatches(matches, "select $TOPIC from " +
 								"{ date-of-birth($TOPIC, $X), $X > \"9\" || " +
 								"  date-of-birth($TOPIC, \"1869-11-28\") || " +
 								"  date-of-birth($P, \"1866-07-23\") } ?");
@@ -1656,14 +1656,14 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "A", new Integer(5), "B", new Integer(2));
 
-    verifyQuery(matches, "select $A, $B from $A = 5, { $A = 5, $B = 2 || $A < 4, $B = 1 || $B = 3 }?");
-    verifyQuery(matches, "select $A, $B from $A = 5, { $A < 4, $B = 1 || $A = 5, $B = 2 || $B = 3 }?");
+    assertQueryMatches(matches, "select $A, $B from $A = 5, { $A = 5, $B = 2 || $A < 4, $B = 1 || $B = 3 }?");
+    assertQueryMatches(matches, "select $A, $B from $A = 5, { $A < 4, $B = 1 || $A = 5, $B = 2 || $B = 3 }?");
 
     matches = new ArrayList();
     addMatch(matches, "A", new Integer(5), "B", new Integer(3));
 
-    verifyQuery(matches, "select $A, $B from $A = 5, { $A < 4, $B = 1 || $B = 3 || $A = 5, $B = 2 }?");
-    verifyQuery(matches, "select $A, $B from $A = 5, { $B = 3 || $A < 4, $B = 1 || $A = 5, $B = 2 }?");
+    assertQueryMatches(matches, "select $A, $B from $A = 5, { $A < 4, $B = 1 || $B = 3 || $A = 5, $B = 2 }?");
+    assertQueryMatches(matches, "select $A, $B from $A = 5, { $B = 3 || $A < 4, $B = 1 || $A = 5, $B = 2 }?");
 	}
 
   public void testBug2149() throws InvalidQueryException, IOException {
@@ -1673,7 +1673,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "X", new Integer(1));
     addMatch(matches, "X", "2");
 
-    verifyQuery(matches, "select $X from { $X = 1 | $X = \"2\" } order by $X?");
+    assertQueryMatches(matches, "select $X from { $X = 1 | $X = \"2\" } order by $X?");
 	}
 
   public void testShortCircuitingOR1() throws InvalidQueryException, IOException {
@@ -1682,7 +1682,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "X", new Integer(1));
 
-    verifyQuery(matches, "select $X from { $X = 1 || $X = 2 }?");
+    assertQueryMatches(matches, "select $X from { $X = 1 || $X = 2 }?");
 	}
 
   public void testShortCircuitingOR2() throws InvalidQueryException, IOException {
@@ -1691,7 +1691,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "X", new Integer(4), "Y", new Integer(2));
 
-    verifyQuery(matches, "select $X, $Y from $X = 4, { $X < 1, $Y = 1 || $X > 2, $Y = 2 || $X > 3, $Y = 3 }?");
+    assertQueryMatches(matches, "select $X, $Y from $X = 4, { $X < 1, $Y = 1 || $X > 2, $Y = 2 || $X > 3, $Y = 3 }?");
 	}
   
   public void testCircularRuleReferences() throws InvalidQueryException, IOException {
@@ -1702,7 +1702,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "Z", getTopicById("x5"));
     addMatch(matches, "Z", getTopicById("x7"));
     
-    verifyQuery(matches, 
+    assertQueryMatches(matches, 
                 "a($x, $z) :- a1($x : r1, $y : r2), b($y, $z). " +
                 "b($x, $z) :- { b1($x : r1, $z : r2) | b1($x : r1, $y : r2), a($y, $z) }. " +
                 "select $Z from a(x1, $Z)?");
@@ -1714,7 +1714,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "TOPIC", getTopicById("magnus"));
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "type-of($topic_, $type_) :- { " +
                 "  instance-of($topic_, $type_) " +
                 "| " +
@@ -1729,7 +1729,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
   public void testIssue277() throws InvalidQueryException, IOException {
     load("issue-277.ltm");
 
-    findNothing("bn($B,$N) :- " +
+    assertFindNothing("bn($B,$N) :- " +
 		"  broader-narrower($B : broader-term, $N : narrower-term). " +
 		
 		"bn1($B,$N) :- bn($B,$I), bn($I,$N). " +
@@ -1745,7 +1745,7 @@ public class QueryProcessorTest extends AbstractQueryTest {
     addMatch(matches, "TOPIC", getTopicById("topic1"),
                       "DESC", "topic1");
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "description($TOPIC, $DESC)" +
                 "order by $DESC asc limit 1?");
   }  

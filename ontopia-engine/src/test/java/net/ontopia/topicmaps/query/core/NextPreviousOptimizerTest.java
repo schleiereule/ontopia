@@ -42,7 +42,7 @@ public class NextPreviousOptimizerTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "DESC", "topic23", "TOPIC", getTopicById("topic2"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "description($TOPIC, $DESC), " +
                 "$DESC < \"topic3\" " +
                 "order by $DESC desc limit 1?");
@@ -55,7 +55,7 @@ public class NextPreviousOptimizerTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "DESC", "topic23", "TOPIC", getTopicById("topic2"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "description($TOPIC, $DESC), " +
                 "\"topic3\" > $DESC " +
                 "order by $DESC desc limit 1?");
@@ -68,7 +68,7 @@ public class NextPreviousOptimizerTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "DESC", "topic3", "TOPIC", getTopicById("topic3"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "description($TOPIC, $DESC), " +
                 "$DESC < \"topic333\" " +
                 "order by $DESC desc limit 1?");
@@ -80,7 +80,7 @@ public class NextPreviousOptimizerTest extends AbstractQueryTest {
     List matches = new ArrayList();
     addMatch(matches, "DESC", "topic3", "TOPIC", getTopicById("topic3"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "description($TOPIC, $DESC), " +
                 "$DESC <= \"topic3\" " +
                 "order by $DESC desc limit 1?");
@@ -93,7 +93,7 @@ public class NextPreviousOptimizerTest extends AbstractQueryTest {
     addMatch(matches, "DESC", "topic3://woohoo/",
              "TOPIC", getTopicById("topic6"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "description($TOPIC, $DESC), " +
                 "$DESC > \"topic3\" " +
                 "order by $DESC limit 1?");
@@ -106,7 +106,7 @@ public class NextPreviousOptimizerTest extends AbstractQueryTest {
     addMatch(matches, "DESC", "topic3://woohoo/",
              "TOPIC", getTopicById("topic6"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "description($TOPIC, $DESC), " +
                 "\"topic3\" < $DESC " +
                 "order by $DESC limit 1?");
@@ -120,7 +120,7 @@ public class NextPreviousOptimizerTest extends AbstractQueryTest {
     addMatch(matches, "DESC", "topic3://woohoo/",
              "TOPIC", getTopicById("topic6"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "description($TOPIC, $DESC), " +
                 "$DESC > \"topic333\" " +
                 "order by $DESC limit 1?");
@@ -133,7 +133,7 @@ public class NextPreviousOptimizerTest extends AbstractQueryTest {
     addMatch(matches, "DESC", "topic3",
              "TOPIC", getTopicById("topic3"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "description($TOPIC, $DESC), " +
                 "$DESC >= \"topic3\" " +
                 "order by $DESC limit 1?");
@@ -142,7 +142,7 @@ public class NextPreviousOptimizerTest extends AbstractQueryTest {
   public void testFindNothing() throws InvalidQueryException, IOException {
     load("int-occs-2.ltm");
     
-    findNothing("description($TOPIC, $DESC), " +
+    assertFindNothing("description($TOPIC, $DESC), " +
                 "$DESC > \"topic4\" " +
                 "order by $DESC limit 1?");
   }

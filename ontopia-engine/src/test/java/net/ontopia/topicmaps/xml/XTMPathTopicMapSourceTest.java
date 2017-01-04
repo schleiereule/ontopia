@@ -44,7 +44,7 @@ public class XTMPathTopicMapSourceTest extends AbstractTopicMapSourceTest {
     source.setSuffix(".xtm");
     
     // run abstract topic map source tests
-    doAbstractTopicMapSourceTests(source);
+    assertCompliesToAbstractTopicMapSource(source);
   }
   
 }

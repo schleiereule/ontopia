@@ -36,7 +36,7 @@ public class StringifierComparatorTest extends AbstractComparatorTest {
   public void testStringifierComparator() {
     UpperCaseGrabber upg = new UpperCaseGrabber();
     GrabberStringifier grb = new GrabberStringifier(upg);
-    testComparator(new StringifierComparator(grb).compare(upg.grab("foobar"), "FOOBAR"), 0, 1);
+    assertComparator(new StringifierComparator(grb).compare(upg.grab("foobar"), "FOOBAR"), 0, 1);
   }
 
 }

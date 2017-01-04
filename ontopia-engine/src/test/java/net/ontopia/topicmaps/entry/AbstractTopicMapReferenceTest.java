@@ -33,7 +33,7 @@ public abstract class AbstractTopicMapReferenceTest extends TestCase {
 
   // --- utility methods
 
-  public void doAbstractTopicMapReferenceTests(AbstractTopicMapReference ref, 
+  public void assertCompliesToAbstractTopicMapReference(AbstractTopicMapReference ref, 
                                                boolean checkOpenAfterClose) throws java.io.IOException {
     // WARNING: always run these tests as the last test as the
     // reference is being closed

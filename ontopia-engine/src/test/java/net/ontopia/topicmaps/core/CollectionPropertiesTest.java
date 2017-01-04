@@ -66,35 +66,35 @@ public abstract class CollectionPropertiesTest extends AbstractTopicMapTest
     }
   }
 
-  protected void testProperty(Object obj, String propName, String propClass) {
+  protected void assertProperty(Object obj, String propName, String propClass) {
     testMethod(obj, "add" + propName, propClass);
     testMethod(obj, "remove" + propName, propClass);
   }
 
   public void testTopic() {
     TopicIF topic = builder.makeTopic();
-    testTMObject(topic);
+    assertTMObject(topic);
   }
 
   public void testAssociation() {
     AssociationIF assoc = builder.makeAssociation(builder.makeTopic());
-    testScoped(assoc);
-    testTMObject(assoc);
+    assertScoped(assoc);
+    assertTMObject(assoc);
   }
 
   public void testTopicName() {
     TopicIF topic = builder.makeTopic();
     TopicNameIF bn = builder.makeTopicName(topic, "");
-    testScoped(bn);
-    testTMObject(bn);
+    assertScoped(bn);
+    assertTMObject(bn);
   }
 
-  protected void testScoped(ScopedIF obj) {
-    testProperty(obj, "Theme", "net.ontopia.topicmaps.core.TopicIF");
+  protected void assertScoped(ScopedIF obj) {
+    assertProperty(obj, "Theme", "net.ontopia.topicmaps.core.TopicIF");
   }
         
-  protected void testTMObject(TMObjectIF obj) {
-    testProperty(obj, "ItemIdentifier", "net.ontopia.infoset.core.LocatorIF");
+  protected void assertTMObject(TMObjectIF obj) {
+    assertProperty(obj, "ItemIdentifier", "net.ontopia.infoset.core.LocatorIF");
   }
         
 }

@@ -36,7 +36,7 @@ public abstract class AbstractGrabberTest extends TestCase {
   protected void tearDown() {
   }
 
-  protected void testGrabber(Object grb, Object identical, Object different) {
+  protected void assertGrabberResult(Object grb, Object identical, Object different) {
     assertTrue("grabber is not equal", grb.equals(identical));
     assertTrue("grabber is equal", !grb.equals(different));
   }

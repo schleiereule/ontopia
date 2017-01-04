@@ -42,7 +42,7 @@ public class RDBMSSingleTopicMapSourceTest extends AbstractTopicMapSourceTest {
     source.setPropertyFile(System.getProperty("net.ontopia.topicmaps.impl.rdbms.PropertyFile"));
 
     // run abstract topic map source tests
-    doAbstractTopicMapSourceTests(source);
+    assertCompliesToAbstractTopicMapSource(source);
   }
   
 }

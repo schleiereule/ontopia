@@ -43,25 +43,29 @@ public abstract class DuplicateReificationTest extends AbstractTopicMapTest {
     ReifiableIF reifiable = builder.makeAssociation(builder.makeTopic());
     TopicIF reifier = builder.makeTopic();
     reifiable.setReifier(null);
+    assertNull(reifiable.getReifier());
     reifiable.setReifier(reifier);
+    assertEquals(reifier, reifiable.getReifier());
     reifiable.setReifier(reifier);
+    assertEquals(reifier, reifiable.getReifier());
     reifiable.setReifier(null);
+    assertNull(reifiable.getReifier());
     // No exceptions should have been thrown at this point
   }
 
   public void testAssociation() {
-    checkDuplicateReificationException(
+    assertThrowsDuplicateReificationException(
       builder.makeAssociation(builder.makeTopic()));
   }
 
   public void testAssociationRole() {
     AssociationIF a = builder.makeAssociation(builder.makeTopic());
-    checkDuplicateReificationException(
+    assertThrowsDuplicateReificationException(
       builder.makeAssociationRole(a, builder.makeTopic(), builder.makeTopic()));
   }
 
   public void testOccurrence() {
-    checkDuplicateReificationException(
+    assertThrowsDuplicateReificationException(
       builder.makeOccurrence(builder.makeTopic(), builder.makeTopic(), "occurrence"));
   }
 
@@ -71,14 +75,14 @@ public abstract class DuplicateReificationTest extends AbstractTopicMapTest {
   // }
 
   public void testTopicName() {
-    checkDuplicateReificationException(
+    assertThrowsDuplicateReificationException(
       builder.makeTopicName(builder.makeTopic(), "name")
     );
   }
 
   public void testVariantName() {
     TopicNameIF name = builder.makeTopicName(builder.makeTopic(), "name");
-    checkDuplicateReificationException(
+    assertThrowsDuplicateReificationException(
       builder.makeVariantName(name, "variant", Collections.singleton(builder.makeTopic())));
   }
 
@@ -86,7 +90,7 @@ public abstract class DuplicateReificationTest extends AbstractTopicMapTest {
    * Internal method to set reification twice with the same reifier.
    * DuplicateReificationException should be detected, fail test otherwise.
    */
-  private void checkDuplicateReificationException(ReifiableIF reifiable) {
+  private void assertThrowsDuplicateReificationException(ReifiableIF reifiable) {
     TopicIF reifier = builder.makeTopic();
     builder.makeAssociation(builder.makeTopic()).setReifier(reifier);
     try {

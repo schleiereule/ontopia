@@ -58,7 +58,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
       }
     }
     
-    verifyQuery(matches, "role-player($ROLE, $PLAYER)?");
+    assertQueryMatches(matches, "role-player($ROLE, $PLAYER)?");
   }  
 
   public void testBothBoundTrue() throws InvalidQueryException, IOException {
@@ -69,7 +69,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     AssociationRoleIF role = (AssociationRoleIF) teacher.getRoles().iterator().next();
     matches.add(new HashMap());
     
-    verifyQuery(matches, "role-player(@" + role.getObjectId() + ", larer)?");
+    assertQueryMatches(matches, "role-player(@" + role.getObjectId() + ", larer)?");
   }
 
   public void testBothBoundFalse() throws InvalidQueryException, IOException {
@@ -79,7 +79,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     TopicIF teacher = getTopicById("larer");
     AssociationRoleIF role = (AssociationRoleIF) teacher.getRoles().iterator().next();
     
-    verifyQuery(matches, "role-player(@" + role.getObjectId() + ", gdm)?");
+    assertQueryMatches(matches, "role-player(@" + role.getObjectId() + ", gdm)?");
   } 
 
   public void testCrossJoin() throws InvalidQueryException, IOException {
@@ -87,7 +87,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
 
     List matches = new ArrayList();
     
-    verifyQuery(matches, OPT_TYPECHECK_OFF +
+    assertQueryMatches(matches, OPT_TYPECHECK_OFF +
                 "topic($TOPIC), role-player($TOPIC, $ROLE)?");
   } 
   
@@ -97,7 +97,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
 
     List matches = new ArrayList();
  
-    verifyQuery(matches, "role-player($ROLE, @" + player.getObjectId() + ")?");
+    assertQueryMatches(matches, "role-player($ROLE, @" + player.getObjectId() + ")?");
   }
 
   public void testRolePlayerPredicate1() throws InvalidQueryException, IOException {
@@ -111,7 +111,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "ROLE", role);
  
-    verifyQuery(matches, "role-player($ROLE, @" + player.getObjectId() + ")?");
+    assertQueryMatches(matches, "role-player($ROLE, @" + player.getObjectId() + ")?");
   }
 
   public void testRolePlayerPredicate2() throws InvalidQueryException, IOException {
@@ -128,7 +128,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "ROLE", role);
  
-    verifyQuery(matches, "role-player($ROLE, @" + player.getObjectId() + ")?");
+    assertQueryMatches(matches, "role-player($ROLE, @" + player.getObjectId() + ")?");
   }
 
   public void testRolePlayerPredicate3() throws InvalidQueryException, IOException {
@@ -150,7 +150,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "ROLE", role);
     addMatch(matches, "ROLE", role3);
  
-    verifyQuery(matches, "role-player($ROLE, @" + player.getObjectId() + ")?");
+    assertQueryMatches(matches, "role-player($ROLE, @" + player.getObjectId() + ")?");
   }
 
   public void testRolePlayerPredicate1b() throws InvalidQueryException, IOException {
@@ -164,7 +164,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "PLAYER", player);
  
-    verifyQuery(matches, "role-player(@" + role.getObjectId() + ", $PLAYER)?");
+    assertQueryMatches(matches, "role-player(@" + role.getObjectId() + ", $PLAYER)?");
   }
 
   public void testRolePlayerPredicate2b() throws InvalidQueryException, IOException {
@@ -181,7 +181,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "PLAYER", player);
  
-    verifyQuery(matches, "role-player(@" + role.getObjectId() + ", $PLAYER)?");
+    assertQueryMatches(matches, "role-player(@" + role.getObjectId() + ", $PLAYER)?");
   }
 
   public void testRolePlayerPredicate3b() throws InvalidQueryException, IOException {
@@ -202,7 +202,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "PLAYER", player);
  
-    verifyQuery(matches, "role-player(@" + role.getObjectId() + ", $PLAYER)?");
+    assertQueryMatches(matches, "role-player(@" + role.getObjectId() + ", $PLAYER)?");
   }
 
   public void testTypeHoistUnapplicable() throws InvalidQueryException, IOException {
@@ -212,7 +212,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "B", getTopicById("lmg"));
     addMatch(matches, "B", getTopicById("stine"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $B from role-player($A, $B), type($A, employee)?");
   }
@@ -226,7 +226,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "A", lmg.getRolesByType(employee).iterator().next());
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "type($A, employee), role-player($A, lmg)?");
   }
@@ -238,7 +238,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "T", getTopicById("lmg"));
     addMatch(matches, "T", getTopicById("stine"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $T from " +
                 "  type($A, works-for), " +
@@ -254,7 +254,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "T", getTopicById("lmg"));
     addMatch(matches, "T", getTopicById("stine"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $T from " +
                 "  type($A, works-for), " +
@@ -275,7 +275,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "T", getTopicById("employee"));
     addMatch(matches, "T", getTopicById("person"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $T from " +
                 "  role-player($R, $T), " +
@@ -290,14 +290,14 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "T", getTopicById("lmg"));
     addMatch(matches, "T", getTopicById("stine"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $T from " +
                 "  played-by(person : type, $RT : role), " +
                 "  role-player($R, $T), " +
                 "  type($R, $RT)?");
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $T from " +
                 "  played-by(person : type, $RT : role), " +
                 "  role-player($R, $T), " +
@@ -311,13 +311,13 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "T", getTopicById("lmg"));
     addMatch(matches, "T", getTopicById("stine"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $T from " +
                 "role-player($R, $T), " +
                 "type($R, employee)?");
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $T from " +
                 "role-player($R, $T), " +
                 "type($R, employee)?");
@@ -329,14 +329,14 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "T", getTopicById("lmg"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $T from " +
                 "instance-of($T, person), " +
                 "role-player($R, $T), " +
                 "type($R, owner)?");
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $T from " +
                 "instance-of($T, person), " +
                 "role-player($R, $T), " +
@@ -350,7 +350,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "T", getTopicById("lmg"));
     addMatch(matches, "T", getTopicById("stine"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $T from " +
                 "  played-by(person : type, $RT : role), " +
@@ -358,7 +358,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
                 "  role-player($R, $T), " +
                 "  type($R, $RT)?");
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $T from " +
                 "  played-by(person : type, $RT : role), " +
                 "  topic($T), " + // binds $T, but might be optimized away
@@ -375,7 +375,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     addMatch(matches, "T", getTopicById("lmg"),   "RT", employee);
     addMatch(matches, "T", getTopicById("stine"), "RT", employee);
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $T, $RT from " +
                 "  played-by(person : type, $RT : role), " +
@@ -383,7 +383,7 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
                 "  role-player($R, $T), " +
                 "  type($R, $RT)?");
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $T, $RT from " +
                 "  played-by(person : type, $RT : role), " +
                 "  topic($T), " + // binds $T, but might be optimized away
@@ -402,13 +402,13 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     Map params = new HashMap();
     params.put("type", getTopicById("employee"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $T from " +
                 "role-player($R, $T), " +
                 "type($R, %type%)?", params);
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $T from " +
                 "role-player($R, $T), " +
                 "type($R, %type%)?", params);
@@ -424,14 +424,14 @@ public class RolePlayerPredicateTest extends AbstractPredicateTest {
     Map params = new HashMap();
     params.put("type", getTopicById("owner"));
     
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "select $T from " +
                 "instance-of($T, person), " +
                 "role-player($R, $T), " +
                 "type($R, %type%)?", params);
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "select $T from " +
                 "instance-of($T, person), " +
                 "role-player($R, $T), " +

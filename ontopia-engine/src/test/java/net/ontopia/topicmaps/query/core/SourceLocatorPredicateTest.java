@@ -74,7 +74,7 @@ public class SourceLocatorPredicateTest extends AbstractPredicateTest {
       addSrclocsOf(matches, assoc.getRoles());
     }
     
-    verifyQuery(matches, "source-locator($OBJ, $LOCATOR)?");  
+    assertQueryMatches(matches, "source-locator($OBJ, $LOCATOR)?");  
   }
 
   private void addSrclocsOf(List matches, Collection objects) {
@@ -95,7 +95,7 @@ public class SourceLocatorPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "LOCATOR", base.resolveAbsolute("#ontopia").getAddress());
     
-    verifyQuery(matches, "source-locator(ontopia, $LOCATOR)?");
+    assertQueryMatches(matches, "source-locator(ontopia, $LOCATOR)?");
   }
 
   public void testLocatorToTopic() throws InvalidQueryException, IOException {
@@ -105,7 +105,7 @@ public class SourceLocatorPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "TOPIC", getTopicById("ontopia"));
     
-    verifyQuery(matches, "source-locator($TOPIC, \"" + base.resolveAbsolute("#ontopia").getAddress() + "\")?");
+    assertQueryMatches(matches, "source-locator($TOPIC, \"" + base.resolveAbsolute("#ontopia").getAddress() + "\")?");
   }
 
   public void testBothBoundFalse() throws InvalidQueryException, IOException {
@@ -113,7 +113,7 @@ public class SourceLocatorPredicateTest extends AbstractPredicateTest {
     LocatorIF base = topicmap.getStore().getBaseAddress();
 
     List matches = new ArrayList();    
-    verifyQuery(matches, "source-locator(type2, \"" + base.resolveAbsolute("#type1").getAddress() + "\")?");
+    assertQueryMatches(matches, "source-locator(type2, \"" + base.resolveAbsolute("#type1").getAddress() + "\")?");
   }
 
   public void testBothBoundTrue() throws InvalidQueryException, IOException {
@@ -123,7 +123,7 @@ public class SourceLocatorPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     matches.add(new HashMap());
     
-    verifyQuery(matches, "source-locator(type1, \"" + base.resolveAbsolute("#type1").getAddress() + "\")?");
+    assertQueryMatches(matches, "source-locator(type1, \"" + base.resolveAbsolute("#type1").getAddress() + "\")?");
   }
   
 }

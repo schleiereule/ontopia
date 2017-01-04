@@ -42,7 +42,7 @@ public class Issue409Test {
   @Test
   public void testOccsWithoutPSI() {
    
-    mergeTypedIF(new TypedIFCreator() {
+    assertMergeTypedIF(new TypedIFCreator() {
 
       public void createTypedIFs(TopicMapBuilderIF builder, TopicIF type) {
         builder.makeOccurrence(builder.makeTopic(), type, "foo1");
@@ -65,7 +65,7 @@ public class Issue409Test {
   @Test
   public void testOccsWithPSI() {
 
-     mergeTypedIF(new TypedIFCreator() {
+     assertMergeTypedIF(new TypedIFCreator() {
 
       public void createTypedIFs(TopicMapBuilderIF builder, TopicIF type) {
         
@@ -91,7 +91,7 @@ public class Issue409Test {
   @Test
   public void testNamesWithoutPSI() {
 
-    mergeTypedIF(new TypedIFCreator() {
+    assertMergeTypedIF(new TypedIFCreator() {
 
       public void createTypedIFs(TopicMapBuilderIF builder, TopicIF type) {
         builder.makeTopicName(builder.makeTopic(), type, "foo1");
@@ -118,7 +118,7 @@ public class Issue409Test {
   @Test
   public void testNamesWithPSI() {
 
-     mergeTypedIF(new TypedIFCreator() {
+     assertMergeTypedIF(new TypedIFCreator() {
 
       public void createTypedIFs(TopicMapBuilderIF builder, TopicIF type) {
         
@@ -142,7 +142,7 @@ public class Issue409Test {
     }); 
   }
   
-  private void mergeTypedIF(TypedIFCreator creator) {
+  private void assertMergeTypedIF(TypedIFCreator creator) {
     
     TopicMapIF source = new InMemoryTopicMapStore().getTopicMap();
     TopicMapBuilderIF builder = source.getBuilder();

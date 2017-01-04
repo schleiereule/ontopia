@@ -74,7 +74,7 @@ public class ItemIdentifierPredicateTest extends AbstractPredicateTest {
       addSrclocsOf(matches, assoc.getRoles());
     }
     
-    verifyQuery(matches, "item-identifier($OBJ, $LOCATOR)?");  
+    assertQueryMatches(matches, "item-identifier($OBJ, $LOCATOR)?");  
   }
 
   private void addSrclocsOf(List matches, Collection objects) {
@@ -95,7 +95,7 @@ public class ItemIdentifierPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "LOCATOR", base.resolveAbsolute("#ontopia").getAddress());
     
-    verifyQuery(matches, "item-identifier(ontopia, $LOCATOR)?");
+    assertQueryMatches(matches, "item-identifier(ontopia, $LOCATOR)?");
   }
 
   public void testLocatorToTopic() throws InvalidQueryException, IOException {
@@ -105,7 +105,7 @@ public class ItemIdentifierPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "TOPIC", getTopicById("ontopia"));
     
-    verifyQuery(matches, "item-identifier($TOPIC, \"" + base.resolveAbsolute("#ontopia").getAddress() + "\")?");
+    assertQueryMatches(matches, "item-identifier($TOPIC, \"" + base.resolveAbsolute("#ontopia").getAddress() + "\")?");
   }
 
   public void testBothBoundFalse() throws InvalidQueryException, IOException {
@@ -113,7 +113,7 @@ public class ItemIdentifierPredicateTest extends AbstractPredicateTest {
     LocatorIF base = topicmap.getStore().getBaseAddress();
 
     List matches = new ArrayList();    
-    verifyQuery(matches, "item-identifier(type2, \"" + base.resolveAbsolute("#type1").getAddress() + "\")?");
+    assertQueryMatches(matches, "item-identifier(type2, \"" + base.resolveAbsolute("#type1").getAddress() + "\")?");
   }
 
   public void testBothBoundTrue() throws InvalidQueryException, IOException {
@@ -123,7 +123,7 @@ public class ItemIdentifierPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     matches.add(new HashMap());
     
-    verifyQuery(matches, "item-identifier(type1, \"" + base.resolveAbsolute("#type1").getAddress() + "\")?");
+    assertQueryMatches(matches, "item-identifier(type1, \"" + base.resolveAbsolute("#type1").getAddress() + "\")?");
   }
   
 }

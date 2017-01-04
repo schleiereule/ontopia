@@ -83,7 +83,7 @@ public class TopicMapSynchronizerBKTest extends TestCase {
                                 source, stopicq, schard);
 
     canonicalize("bk-empty.cxtm", target);
-    compare("bk-empty.cxtm");
+    assertEqualsToBaseline("bk-empty.cxtm");
   }
 
   public void testStaticTM() throws InvalidQueryException, IOException {
@@ -94,7 +94,7 @@ public class TopicMapSynchronizerBKTest extends TestCase {
                                 source, stopicq, schard);
 
     canonicalize("bk-static.cxtm", target);
-    compare("bk-static.cxtm");
+    assertEqualsToBaseline("bk-static.cxtm");
   }
 
   public void testAddEmneord() throws InvalidQueryException, IOException {
@@ -105,7 +105,7 @@ public class TopicMapSynchronizerBKTest extends TestCase {
                                 source, stopicq, schard);
 
     canonicalize("bk-add-emneord.cxtm", target);
-    compare("bk-add-emneord.cxtm");
+    assertEqualsToBaseline("bk-add-emneord.cxtm");
   }  
 
   public void testRemoveEmneord() throws InvalidQueryException, IOException {
@@ -116,7 +116,7 @@ public class TopicMapSynchronizerBKTest extends TestCase {
                                 source, stopicq, schard);
 
     canonicalize("bk-remove-emneord.cxtm", target);
-    compare("bk-remove-emneord.cxtm");
+    assertEqualsToBaseline("bk-remove-emneord.cxtm");
   }
 
   public void testBKEmneord() throws InvalidQueryException, IOException {
@@ -127,7 +127,7 @@ public class TopicMapSynchronizerBKTest extends TestCase {
                                 source, stopicq, schard);
 
     canonicalize("bk-private-emneord.cxtm", target);
-    compare("bk-private-emneord.cxtm");
+    assertEqualsToBaseline("bk-private-emneord.cxtm");
   }
 
   public void testSameAssociation()
@@ -152,7 +152,7 @@ public class TopicMapSynchronizerBKTest extends TestCase {
                                 source, stopicq, schard);
 
     canonicalize("bk-same-association.cxtm", target);
-    compare("bk-same-association.cxtm");
+    assertEqualsToBaseline("bk-same-association.cxtm");
   }
 
   public void testSingleTopicTwoFilter() throws IOException {
@@ -172,7 +172,7 @@ public class TopicMapSynchronizerBKTest extends TestCase {
     TopicMapSynchronizer.update(target, sourcet, tchard, schard);
 
     canonicalize("single-topic-two.filter.cxtm", target);
-    compare("single-topic-two.filter.cxtm");
+    assertEqualsToBaseline("single-topic-two.filter.cxtm");
   }
 
   public void testReifiedAssociation() throws IOException, InvalidQueryException {
@@ -190,7 +190,7 @@ public class TopicMapSynchronizerBKTest extends TestCase {
 
     // Test
     canonicalize("reify-assoc.cxtm", target);
-    compare("reify-assoc.cxtm");
+    assertEqualsToBaseline("reify-assoc.cxtm");
   }
   
   // ===== INTERNAL
@@ -209,7 +209,7 @@ public class TopicMapSynchronizerBKTest extends TestCase {
     ImportExportUtils.getWriter(out).write(tm);*/
   }
 
-  private void compare(String filename) throws IOException {
+  private void assertEqualsToBaseline(String filename) throws IOException {
     String out = base + File.separator + "out" + File.separator + filename;
     String baseline = TestFileUtils.getTestInputFile(testdataDirectory, "baseline", filename);
     assertTrue("test file " + filename + " canonicalized wrongly",

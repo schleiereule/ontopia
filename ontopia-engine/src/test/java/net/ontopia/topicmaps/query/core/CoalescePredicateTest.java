@@ -40,7 +40,7 @@ public class CoalescePredicateTest extends AbstractPredicateTest {
   
   public void testNotBoundTrueOne() throws IOException {
     load("bb-test.ltm");
-    getParseError("coalesce($TOPIC, thequeen)?");
+    assertGetParseError("coalesce($TOPIC, thequeen)?");
   }
   
   public void testNotBoundTrueFirst() throws InvalidQueryException, IOException {
@@ -50,7 +50,7 @@ public class CoalescePredicateTest extends AbstractPredicateTest {
     TopicIF topic = getTopicById("thequeen");
     addMatch(matches, "TOPIC", topic);
 
-    verifyQuery(matches, "coalesce($TOPIC, thequeen, horse)?");
+    assertQueryMatches(matches, "coalesce($TOPIC, thequeen, horse)?");
   }
   
   public void testNotBoundTrueFirstVariable() throws InvalidQueryException, IOException {
@@ -60,7 +60,7 @@ public class CoalescePredicateTest extends AbstractPredicateTest {
     TopicIF topic = getTopicById("thequeen");
     addMatch(matches, "TOPIC", topic);
 
-    verifyQuery(matches, "select $TOPIC from $QUEEN = thequeen, coalesce($TOPIC, $QUEEN, horse)?");
+    assertQueryMatches(matches, "select $TOPIC from $QUEEN = thequeen, coalesce($TOPIC, $QUEEN, horse)?");
   }
   
   public void testNotBoundTrueSecondVariable() throws InvalidQueryException, IOException {
@@ -71,19 +71,19 @@ public class CoalescePredicateTest extends AbstractPredicateTest {
     addMatch(matches, "DESC", "The queen of england");
     addMatch(matches, "DESC", "Foobar");
 
-    verifyQuery(matches, "select $DESC from { $X = thequeen | $X = gdm}, { beskrivelse($X, $BESKRIVELSE) }, coalesce($DESC, $BESKRIVELSE, \"Foobar\")?");
+    assertQueryMatches(matches, "select $DESC from { $X = thequeen | $X = gdm}, { beskrivelse($X, $BESKRIVELSE) }, coalesce($DESC, $BESKRIVELSE, \"Foobar\")?");
   }
   
   public void testBoundTrueFirst() throws InvalidQueryException, IOException {
     load("bb-test.ltm");
 
-    verifyQuery("coalesce(thequeen, thequeen, horse)?");
+    assertQuery("coalesce(thequeen, thequeen, horse)?");
   }
   
   public void testBoundTrueSecond() throws InvalidQueryException, IOException {
     load("bb-test.ltm");
 
-    findNothing("coalesce(thequeen, horse, thequeen)?");
+    assertFindNothing("coalesce(thequeen, horse, thequeen)?");
   }  
 
   public void testBoundVariables() throws InvalidQueryException, IOException {
@@ -93,7 +93,7 @@ public class CoalescePredicateTest extends AbstractPredicateTest {
     addMatch(matches, "A", getTopicById("thequeen"),
                       "B", getTopicById("horse"));
 
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "{ $A = thequeen, $B = horse | " +
                 "  $A = horse, $B = thequeen }, " +
                 "coalesce(thequeen, $A, $B)?");
@@ -105,7 +105,7 @@ public class CoalescePredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "value", "default");
 
-    verifyQuery(matches, "select $value from " +
+    assertQueryMatches(matches, "select $value from " +
                          "coalesce($value, $unknown, \"default\")?");
   }
 
@@ -115,7 +115,7 @@ public class CoalescePredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     addMatch(matches, "value", "default");
 
-    verifyQuery(matches, "select $value from " +
+    assertQueryMatches(matches, "select $value from " +
                          "coalesce($value, \"default\", $unknown)?");
   }
 }

@@ -41,7 +41,7 @@ public class ResourceTopicMapSourceTest extends AbstractTopicMapSourceTest {
     source.setId("fooid");
     source.setTitle("footitle");
     source.setSyntax("LTM");
-    verifyLTMSource(source);
+    assertCorrectLTMSource(source);
   }
 
   public void testLTM2() {
@@ -49,11 +49,11 @@ public class ResourceTopicMapSourceTest extends AbstractTopicMapSourceTest {
     source.setResourceName("net/ontopia/testdata/various/bart.ltm");
     source.setId("fooid");
     source.setTitle("footitle");
-    verifyLTMSource(source);
+    assertCorrectLTMSource(source);
   }
 
   @SuppressWarnings("unchecked")
-  protected void verifyLTMSource(ResourceTopicMapSource source) {
+  protected void assertCorrectLTMSource(ResourceTopicMapSource source) {
     Collection refs = source.getReferences();
     assertTrue("URLTopicMapSource.getReferences().size() != 1", refs.size() == 1);
     TopicMapReferenceIF ref = (TopicMapReferenceIF)refs.iterator().next();

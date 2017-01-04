@@ -47,7 +47,7 @@ public class ComparisonPredicateTests extends AbstractPredicateTest {
     addMatch(matches, "V", "Unknown 2");
     addMatch(matches, "V", "Trygve Garshol");
     
-    verifyQuery(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V > \"Tr\"?");
+    assertQueryMatches(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V > \"Tr\"?");
   }
 
   public void testLessThan() throws InvalidQueryException, IOException {
@@ -58,7 +58,7 @@ public class ComparisonPredicateTests extends AbstractPredicateTest {
     addMatch(matches, "V", "Astri England Garshol");
     addMatch(matches, "V", "Bertha England");
     
-    verifyQuery(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V < \"Bh\"?");
+    assertQueryMatches(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V < \"Bh\"?");
   }
 
   public void testLessThanEqual() throws InvalidQueryException, IOException {
@@ -70,7 +70,7 @@ public class ComparisonPredicateTests extends AbstractPredicateTest {
     addMatch(matches, "V", "Bertha England");
     addMatch(matches, "V", "Bj\u00F8rg England");
     
-    verifyQuery(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V <= \"Bj\u00F8rg England\"?");
+    assertQueryMatches(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V <= \"Bj\u00F8rg England\"?");
   }
 
   public void testGreaterThanEqual() throws InvalidQueryException, IOException {
@@ -82,7 +82,7 @@ public class ComparisonPredicateTests extends AbstractPredicateTest {
     addMatch(matches, "V", "Unknown 2");
     addMatch(matches, "V", "Trygve Garshol");
     
-    verifyQuery(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V >= \"Trygve Garshol\"?");
+    assertQueryMatches(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V >= \"Trygve Garshol\"?");
   }
 
   public void testBetween1() throws InvalidQueryException, IOException {
@@ -96,7 +96,7 @@ public class ComparisonPredicateTests extends AbstractPredicateTest {
     addMatch(matches, "V", "Magnus England");
     addMatch(matches, "V", "May Stenersen");
     
-    verifyQuery(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V > \"K\", $V < \"N\"?");
+    assertQueryMatches(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V > \"K\", $V < \"N\"?");
   }
 
   public void testBetween2() throws InvalidQueryException, IOException {
@@ -109,7 +109,7 @@ public class ComparisonPredicateTests extends AbstractPredicateTest {
     addMatch(matches, "V", "Lars Magne Skalle");
     addMatch(matches, "V", "Magnus England");
     addMatch(matches, "V", "May Stenersen");
-    verifyQuery(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V >= \"Kjellaug Garshol\", $V <= \"May Stenersen\"?");
+    assertQueryMatches(matches, "select $V from topic-name($T, $BN), value($BN, $V), $V >= \"Kjellaug Garshol\", $V <= \"May Stenersen\"?");
   }
 
   public void testBug2123() throws InvalidQueryException, IOException {
@@ -117,7 +117,7 @@ public class ComparisonPredicateTests extends AbstractPredicateTest {
 
     List matches = new ArrayList();
     addMatch(matches, "N", "Asle Skalle");
-		verifyQuery(matches, "select $N from instance-of($T, father), topic-name($T, $TN), value($TN, $N), { age($T, $AGE) }, $AGE > \"11\"?");
+		assertQueryMatches(matches, "select $N from instance-of($T, father), topic-name($T, $TN), value($TN, $N), { age($T, $AGE) }, $AGE > \"11\"?");
   }
 
 }

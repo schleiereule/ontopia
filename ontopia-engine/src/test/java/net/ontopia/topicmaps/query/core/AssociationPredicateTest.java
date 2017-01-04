@@ -46,14 +46,14 @@ public class AssociationPredicateTest extends AbstractPredicateTest {
     while (it.hasNext())
       addMatch(matches, "TOPIC", it.next());
     
-    verifyQuery(matches, "association($TOPIC)?");
+    assertQueryMatches(matches, "association($TOPIC)?");
   }
 
   public void testWithSpecificAssociationFalse()
     throws InvalidQueryException, IOException {
     load("jill.xtm");
 
-    findNothing(OPT_TYPECHECK_OFF +
+    assertFindNothing(OPT_TYPECHECK_OFF +
                 "association(jill-ontopia-topic)?");
   }
 
@@ -64,7 +64,7 @@ public class AssociationPredicateTest extends AbstractPredicateTest {
     List matches = new ArrayList();
     matches.add(new HashMap());
     
-    verifyQuery(matches, "association(jill-ontopia-association)?");
+    assertQueryMatches(matches, "association(jill-ontopia-association)?");
   }
 
   public void testQMOverwriteProblem() throws InvalidQueryException, IOException {
@@ -83,7 +83,7 @@ public class AssociationPredicateTest extends AbstractPredicateTest {
     //  4) therefore the topicmap() predicate doesn't see the TM (it's scanning
     //     the same result set), and
     //  5) we get an empty result
-    verifyQuery(matches,
+    assertQueryMatches(matches,
                 "/* #OPTION: optimizer.reorder = false */ " +
                 "$OBJECT = jillstm, " +
                 "{ association($OBJECT) | topicmap($OBJECT) }?");
@@ -92,7 +92,7 @@ public class AssociationPredicateTest extends AbstractPredicateTest {
   public void testFiltering() throws InvalidQueryException, IOException {
     load("family.ltm");
 
-    findNothing("/* #OPTION: optimizer.reorder = false */ " +
+    assertFindNothing("/* #OPTION: optimizer.reorder = false */ " +
                 "$A = 1, association($A)?");
   }
 }

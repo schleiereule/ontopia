@@ -47,7 +47,7 @@ public class DeciderIteratorTest extends AbstractIteratorTest {
     
     Iterator iter = new DeciderIterator(decider, getIterator(size));
 
-    testIterator(iter, size - 1);
+    assertIteratorSize(iter, size - 1);
   }
 
 }

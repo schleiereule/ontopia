@@ -55,7 +55,7 @@ public class BrainBankTests extends AbstractPredicateTest {
                       "DESCR", "Person who rides a horse",
                       "DATE",  "2003-07-04");
     
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "select $TOPIC, $DESCR, $DATE from " +
                      "  value-like($OBJ, \"horse\"), " +
                      "  { topic-name($TOPIC, $OBJ) | " +
@@ -82,7 +82,7 @@ public class BrainBankTests extends AbstractPredicateTest {
     addMatch(matches, "ASSOC", assoc,
                       "DATE", "2003-08-14",
                       "DESCR", "The best association ever");
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "select $ASSOC, $DATE, $DESCR from " +
                      "  value-like($OCC, \"association\"), " +
                      "  occurrence($TOPIC, $OCC), type($OCC, beskrivelse), " +
@@ -108,7 +108,7 @@ public class BrainBankTests extends AbstractPredicateTest {
     addMatch(matches, "COMMENT", getTopicById("comment2"),
                       "DATE"   , "2003-06-04");
     
-    verifyQueryOrder(matches,
+    assertQueryOrder(matches,
                      "select $COMMENT, $DATE from " +
                      "  value-like($CONTENT, \"horse\"), " +
                      "  occurrence($COMMENT, $CONTENT), type($CONTENT, content), " +

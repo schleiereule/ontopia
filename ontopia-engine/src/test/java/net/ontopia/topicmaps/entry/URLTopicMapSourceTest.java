@@ -39,7 +39,7 @@ public class URLTopicMapSourceTest extends AbstractTopicMapSourceTest {
     source.setSyntax("XTM");
 
     // run abstract topic map source tests
-    doAbstractTopicMapSourceTests(source);
+    assertCompliesToAbstractTopicMapSource(source);
   }
 
   public void testXTM1() {
@@ -47,7 +47,7 @@ public class URLTopicMapSourceTest extends AbstractTopicMapSourceTest {
     source.setId("fooid");
     source.setTitle("footitle");
     source.setSyntax("XTM");
-    verifyXTMSource(source);
+    assertXTMSource(source);
   }
 
   public void testXTM2() {
@@ -55,10 +55,10 @@ public class URLTopicMapSourceTest extends AbstractTopicMapSourceTest {
     source.setUrl("file:/tmp/foobar.xtm");
     source.setId("fooid");
     source.setTitle("footitle");
-    verifyXTMSource(source);
+    assertXTMSource(source);
   }
 
-  protected void verifyXTMSource(URLTopicMapSource source) {
+  protected void assertXTMSource(URLTopicMapSource source) {
     Collection refs = source.getReferences();
     assertTrue("URLTopicMapSource.getReferences().size() != 1", refs.size() == 1);
     TopicMapReferenceIF ref = (TopicMapReferenceIF)refs.iterator().next();
@@ -74,7 +74,7 @@ public class URLTopicMapSourceTest extends AbstractTopicMapSourceTest {
     source.setId("fooid");
     source.setTitle("footitle");
     source.setSyntax("LTM");
-    verifyLTMSource(source);
+    assertLTMSource(source);
   }
 
   public void testLTM2() {
@@ -82,10 +82,10 @@ public class URLTopicMapSourceTest extends AbstractTopicMapSourceTest {
     source.setUrl("file:/tmp/foobar.ltm");
     source.setId("fooid");
     source.setTitle("footitle");
-    verifyLTMSource(source);
+    assertLTMSource(source);
   }
 
-  protected void verifyLTMSource(URLTopicMapSource source) {
+  protected void assertLTMSource(URLTopicMapSource source) {
     Collection refs = source.getReferences();
     assertTrue("URLTopicMapSource.getReferences().size() != 1", refs.size() == 1);
     TopicMapReferenceIF ref = (TopicMapReferenceIF)refs.iterator().next();
