@@ -159,6 +159,14 @@ public class URILocatorTest extends AbstractLocatorTest {
     assertEquals(fragmentUTF, locator.getUri().getFragment());
   }
 
+  // https://github.com/ontopia/ontopia/issues/289
+  public void testIssue289() {
+    URILocator locator = URILocator.create("http://en.wikipedia.org/wiki/Beethoven/x+y/");
+
+    assertNotNull(locator);
+    assertTrue(locator.getUri().getSchemeSpecificPart().endsWith("x+y/"));
+  }
+
   // --- Internal
 
   private void testAbsoluteResolution(String base, String uri, String external) {
